@@ -1,6 +1,6 @@
 # 2048 Web Game
 
-Built using HTML5, CSS3, SASS, Javascript
+Built using HTML5, CSS3, SASS/SCSS, Javascript
 
 ## Introduction
 
