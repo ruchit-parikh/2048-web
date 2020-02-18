@@ -1,2 +1,3 @@
-# 2048
-2048 Game Clone - Web 
+# 2048 Game
+
+2048 Web based Game.
