@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2048 | Web Game</title>
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+  <main>
+    <section id="game-viewport">
+      <div class="row">
+        <div class="col-lg-8 bg-primary" id="game-wrapper">
+          <h1 class="heading">Play 2048 Game!</h1>
+          <span class="instruction">
+            How To Play: Use your arrow keys or mouse drag to move the tiles. When two tiles with the same number touch, they merge into one!
+          </span>
+
+          <div class="row align-items-flex-end">
+            <div class="col-sm-6 col-md-7 col-xl-6">
+              <div id="game-grid">
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-5 col-xl-6">
+              <h4 class="heading">Name: <span id="player-name" class="float-right">King Riyo</span></h4>
+              <span class="label-block">Score: <span id="current-score">0</span></span>
+              <span class="label-block">Best: <span id="best-score">0</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 bg-secondary" id="leaderboard">
+          <h2 class="heading">
+            Top <span id="scores-count">50</span> Scores
+          </h2>
+          <ul class="list">
+            <li class="list-item">
+              <span class="name">Ruchit Parikh The Legend</span>
+              <span class="points">0</span>
+            </li>
+            <li class="list-item">
+              <span class="name">Ruchit</span>
+              <span class="points">25000</span>
+            </li>
+
+            <li class="list-item">
+              <span class="name">Ruchit</span>
+              <span class="points">25000</span>
+            </li>
+            <li class="list-item">
+              <span class="name">Ruchit</span>
+              <span class="points">25000</span>
+            </li>
+            <li class="list-item">
+              <span class="name">Ruchit</span>
+              <span class="points">25000</span>
+            </li>
+            <li class="list-item">
+              <span class="name">Ruchit</span>
+              <span class="points">25000</span>
+            </li>
+            <li class="list-item">
+              <span class="name">Ruchit</span>
+              <span class="points">25000</span>
+            </li>
+            <li class="list-item">
+              <span class="name">Ruchit</span>
+              <span class="points">25000</span>
+            </li>
+            <li class="list-item">
+              <span class="name">Ruchit Parikh</span>
+              <span class="points">25000</span>
+            </li>
+            <li class="list-item">
+              <span class="name">Ruchit</span>
+              <span class="points">25000</span>
+            </li>
+            <li class="list-item">
+              <span class="name">Ruchit</span>
+              <span class="points">25000</span>
+            </li>
+            <li class="list-item">
+              <span class="name">Ruchit</span>
+              <span class="points">25000</span>
+            </li>
+            <li class="list-item">
+              <span class="name">Ruchit</span>
+              <span class="points">25000</span>
+            </li>
+          </ul>
+        </div>  
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/game-manager.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

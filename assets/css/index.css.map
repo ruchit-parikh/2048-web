@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "../scss/grid/index.scss",
+        "../scss/grid/_mixins.scss"
+    ],
+    "names": [],
+    "file": "index.css"
+}

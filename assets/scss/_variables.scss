@@ -1,0 +1,76 @@
+//screen breakpoints
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+) !default;
+
+//padding and margins
+$spacer: 1rem !default;
+$spacers: (
+  0: 0,
+  1: $spacer * .25,
+  2: $spacer * .5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+) !default;
+
+$enable-important-utilities: true !default;
+$grid-columns: 12;
+
+//colors
+$colors: (
+  white: #fff,
+  light: #f0f0f0,
+  gray: rgba(238, 228, 218, 0.35),
+  primary: #8f7a66,
+  secondary: #bbada0,
+  ternary: rgba(98, 98, 98, 0.35) 
+) !default;
+
+$number-colors: (
+  2: #eecaab,
+  4: #dbc397,
+  8: #f2b179,
+  16: #f59563,
+  32: #f67c5f,
+  64: #f65e3b, 
+  128: #edcf72, 
+  256: #edcf72, 
+  512: #edcc61,
+  1024: #dbb539, 
+  2048: #e0b836, 
+  4096: #b3e036,
+  8192: #acd930,
+  16384: #aadb21,
+  32768: #1e91d9
+);
+
+$number-font-sizes: (
+  2: 2rem,
+  4: 2rem,
+  8: 2rem,
+  16: 2rem,
+  32: 2rem,
+  64: 2rem, 
+  128: 2rem, 
+  256: 2rem, 
+  512: 2rem,
+  1024: 1.5rem, 
+  2048: 1.5rem, 
+  4096: 1.5rem,
+  8192: 1.5rem,
+  16384: 1rem,
+  32768: 1rem
+);
+
+//fonts
+$font-size: 18px !default;
+$font-family: "sans-serif" !default;
+$letter-spacing: 1px !default;
+
+$border-radius: 10px !default;
+$border-width: 3px !default;

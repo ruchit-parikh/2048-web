@@ -1,0 +1,42 @@
+@mixin create-row() {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+@mixin create-col($size, $columns: $grid-columns) {
+  flex: 0 0 percentage($size / $columns);
+  max-width: percentage($size / $columns);
+}
+
+@mixin create-columns($columns: $grid-columns, $breakpoints: $grid-breakpoints) {
+  %grid-column {
+    position: relative;
+    width: 100%;
+  }
+
+  @each $breakpoint in map-keys($breakpoints) {
+    $infix: breakpoint-infix($breakpoint, $breakpoints);
+
+    // Allow columns to stretch full width below their breakpoints
+    @for $i from 1 through $columns {
+      .col#{$infix}-#{$i} {
+        @extend %grid-column;
+
+        & > *:not(.row) {
+          margin-left: map-get($spacers, 4);
+          margin-right: map-get($spacers, 4);
+          box-sizing: border-box;
+        }
+      }
+    }
+
+    @include media-breakpoint-up($breakpoint, $breakpoints) {
+      @for $i from 1 through $columns {
+        .col#{$infix}-#{$i} {
+          @include create-col($i, $columns);
+        }
+      }
+    }
+  }
+}

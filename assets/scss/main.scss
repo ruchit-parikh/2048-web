@@ -1,0 +1,140 @@
+@import "_variables";
+@import "_functions";
+@import "_mixins";
+@import "grid/index";
+@import "utilities/index";
+@import "setup/index";
+
+%text-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.heading {
+  font-weight: 900;
+  color: map-get($colors, white);
+
+  @include media-breakpoint-down(md) {
+    font-size: 1.5rem;
+  }
+}
+
+.instruction {
+  font-weight: 700;
+  text-align: justify;
+  color: map-get($colors, white);
+  display: block;
+  margin-bottom: map-get($spacers, 4);
+}
+
+#leaderboard,
+#game-wrapper {
+  height: 100vh;
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+
+  @include media-breakpoint-down(md) {
+    overflow-y: visible;
+    height: fit-content;
+    scroll-behavior: auto;
+  }
+}
+
+#leaderboard .list {
+  list-style: none;
+  padding: 0;
+  counter-reset: rank;
+
+  .list-item {
+    display: flex;
+    align-items: center;
+    padding: 25px;
+    background-color: map-get($colors, ternary);
+    margin-bottom: 10px;
+    color: map-get($colors, white);
+    font-weight: 900;
+    box-shadow: 2px 2px 1px map-get($colors, gray);
+    border: $border-width solid map-get($colors, white);
+    border-radius: $border-radius;
+
+    .name {
+      text-transform: uppercase;
+      font-size: $font-size;
+      letter-spacing: $letter-spacing;
+      width: 8rem;
+      @extend %text-ellipsis;
+      
+      @include media-breakpoint-down(md) {
+        width: 5rem;
+      }
+    }
+
+    .points {
+      margin-left: auto;
+      text-align: right;
+      width: 8rem;
+      @extend %text-ellipsis
+    }
+
+    &::before {
+      counter-increment: rank;
+      content: counter(rank);
+      margin-right: 5px;
+    }
+  }
+}
+
+.label-block {
+  display: flex;
+  align-items: center;
+  background: map-get($colors, ternary);
+  margin-bottom: map-get($spacers, 3);
+  color: map-get($colors, white);
+  font-weight: 700;
+  padding: map-get($spacers, 3);
+  border-radius: $border-radius;
+  border: $border-width solid map-get($colors, white);
+
+  #current-score,
+  #best-score {
+    font-size: 1.25rem;
+    text-align: right;
+    width: 7rem;
+    margin-left: auto;
+    @extend %text-ellipsis;
+  }
+}
+
+#game-grid {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: map-get($colors, secondary);
+  margin-bottom: map-get($spacers, 2);
+  
+  .game-grid-cell {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    color: map-get($colors, white);
+    font-weight: 700;
+    font-size: 1rem;
+    background-color: map-get($colors, ternary);
+
+    &::before {
+      content: attr(data-value);
+    }
+
+    @each $number in map-keys($number-colors) {
+      &[data-value="#{$number}"] {
+        font-size: map-get($number-font-sizes, $number);
+        background-color: map-get($number-colors, $number);
+        transform: scale(1);
+        transition: all 0.1s ease-in;
+      }
+    }
+  }
+}
