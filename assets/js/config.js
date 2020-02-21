@@ -5,8 +5,8 @@ const grid = 4;
 const spotValues = [2, 4];
 
 //compute const height and width of cells in the beginning to avoid computation at each move
-const margin = 2;
-const cellWidth = ((100 / grid) - margin);
+const cellMargin = 3;
+const cellWidth = ((100 / grid) - cellMargin);
 const cellHeight = document.querySelector('#game-grid').getBoundingClientRect().width / grid;
 
 //intial numbers of tiles generated

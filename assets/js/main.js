@@ -5,6 +5,5 @@
 
 //initialize game and setup everything that needs
 function init() {
-  let grid = new GameGrid();
-  let inputManager = new InputManager();
+  return new GameManager();
 }

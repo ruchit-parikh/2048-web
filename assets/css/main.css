@@ -2859,17 +2859,22 @@ html, body {
   margin-left: auto;
 }
 
-#game-grid {
+#game-grid-wrapper {
+  position: relative;
+  padding: 5px;
+  background-color: #bbada0;
+  margin-bottom: 1rem;
+}
+
+#game-grid-wrapper #game-grid {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  background-color: #bbada0;
-  margin-bottom: 0.5rem;
 }
 
-#game-grid .game-grid-cell {
+#game-grid-wrapper #game-grid .game-grid-cell {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2887,142 +2892,128 @@ html, body {
   background-color: rgba(98, 98, 98, 0.35);
 }
 
-#game-grid .game-grid-cell::before {
+#game-grid-wrapper #filled-grid {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+#game-grid-wrapper #filled-grid .tile {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  background-color: rgba(98, 98, 98, 0.35);
+  opacity: 0;
+  scale: 0;
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
+}
+
+#game-grid-wrapper #filled-grid .tile::before {
   content: attr(data-value);
 }
 
-#game-grid .game-grid-cell[data-value="2"] {
+#game-grid-wrapper #filled-grid .tile[data-value="2"] {
   font-size: 2rem;
   background-color: #eecaab;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-  -webkit-transition: all 0.1s ease-in;
-  transition: all 0.1s ease-in;
+  z-index: 2;
 }
 
-#game-grid .game-grid-cell[data-value="4"] {
+#game-grid-wrapper #filled-grid .tile[data-value="4"] {
   font-size: 2rem;
   background-color: #dbc397;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-  -webkit-transition: all 0.1s ease-in;
-  transition: all 0.1s ease-in;
+  z-index: 4;
 }
 
-#game-grid .game-grid-cell[data-value="8"] {
+#game-grid-wrapper #filled-grid .tile[data-value="8"] {
   font-size: 2rem;
   background-color: #f2b179;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-  -webkit-transition: all 0.1s ease-in;
-  transition: all 0.1s ease-in;
+  z-index: 8;
 }
 
-#game-grid .game-grid-cell[data-value="16"] {
+#game-grid-wrapper #filled-grid .tile[data-value="16"] {
   font-size: 2rem;
   background-color: #f59563;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-  -webkit-transition: all 0.1s ease-in;
-  transition: all 0.1s ease-in;
+  z-index: 16;
 }
 
-#game-grid .game-grid-cell[data-value="32"] {
+#game-grid-wrapper #filled-grid .tile[data-value="32"] {
   font-size: 2rem;
   background-color: #f67c5f;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-  -webkit-transition: all 0.1s ease-in;
-  transition: all 0.1s ease-in;
+  z-index: 32;
 }
 
-#game-grid .game-grid-cell[data-value="64"] {
+#game-grid-wrapper #filled-grid .tile[data-value="64"] {
   font-size: 2rem;
   background-color: #f65e3b;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-  -webkit-transition: all 0.1s ease-in;
-  transition: all 0.1s ease-in;
+  z-index: 64;
 }
 
-#game-grid .game-grid-cell[data-value="128"] {
+#game-grid-wrapper #filled-grid .tile[data-value="128"] {
   font-size: 2rem;
   background-color: #edcf72;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-  -webkit-transition: all 0.1s ease-in;
-  transition: all 0.1s ease-in;
+  z-index: 128;
 }
 
-#game-grid .game-grid-cell[data-value="256"] {
+#game-grid-wrapper #filled-grid .tile[data-value="256"] {
   font-size: 2rem;
   background-color: #edcf72;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-  -webkit-transition: all 0.1s ease-in;
-  transition: all 0.1s ease-in;
+  z-index: 256;
 }
 
-#game-grid .game-grid-cell[data-value="512"] {
+#game-grid-wrapper #filled-grid .tile[data-value="512"] {
   font-size: 2rem;
   background-color: #edcc61;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-  -webkit-transition: all 0.1s ease-in;
-  transition: all 0.1s ease-in;
+  z-index: 512;
 }
 
-#game-grid .game-grid-cell[data-value="1024"] {
+#game-grid-wrapper #filled-grid .tile[data-value="1024"] {
   font-size: 1.5rem;
   background-color: #dbb539;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-  -webkit-transition: all 0.1s ease-in;
-  transition: all 0.1s ease-in;
+  z-index: 1024;
 }
 
-#game-grid .game-grid-cell[data-value="2048"] {
+#game-grid-wrapper #filled-grid .tile[data-value="2048"] {
   font-size: 1.5rem;
   background-color: #e0b836;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-  -webkit-transition: all 0.1s ease-in;
-  transition: all 0.1s ease-in;
+  z-index: 2048;
 }
 
-#game-grid .game-grid-cell[data-value="4096"] {
+#game-grid-wrapper #filled-grid .tile[data-value="4096"] {
   font-size: 1.5rem;
   background-color: #b3e036;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-  -webkit-transition: all 0.1s ease-in;
-  transition: all 0.1s ease-in;
+  z-index: 4096;
 }
 
-#game-grid .game-grid-cell[data-value="8192"] {
+#game-grid-wrapper #filled-grid .tile[data-value="8192"] {
   font-size: 1.5rem;
   background-color: #acd930;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-  -webkit-transition: all 0.1s ease-in;
-  transition: all 0.1s ease-in;
+  z-index: 8192;
 }
 
-#game-grid .game-grid-cell[data-value="16384"] {
+#game-grid-wrapper #filled-grid .tile[data-value="16384"] {
   font-size: 1rem;
   background-color: #aadb21;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-  -webkit-transition: all 0.1s ease-in;
-  transition: all 0.1s ease-in;
+  z-index: 16384;
 }
 
-#game-grid .game-grid-cell[data-value="32768"] {
+#game-grid-wrapper #filled-grid .tile[data-value="32768"] {
   font-size: 1rem;
   background-color: #1e91d9;
-  -webkit-transform: scale(1);
-          transform: scale(1);
-  -webkit-transition: all 0.1s ease-in;
-  transition: all 0.1s ease-in;
+  z-index: 32768;
 }
 /*# sourceMappingURL=main.css.map */
