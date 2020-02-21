@@ -1,6 +1,7 @@
 let GameGrid = (function () {
   let instance;
 
+  //private singleton factory
   class GameGridFactory {
     constructor() {
       this.cells = new Array(Math.pow(grid, 2)).fill('');
@@ -40,12 +41,15 @@ let GameGrid = (function () {
       tile.style.width = tileStyles.width + 'px';
       tile.style.height = tileStyles.height + 'px';
       tile.style.transform = "translate(" + target.offsetLeft + "px, " + target.offsetTop + "px)";
+      tile.style.transformOrigin = target.offsetLeft + (tileStyles.width / 2) + 'px ' + (target.offsetTop + (tileStyles.height / 2)) + 'px';
       document.querySelector('#filled-grid').append(tile);
 
-      //performing zoomin animation 
-      tile.style.scale = 1;
-      tile.style.opacity = 1;
-      return;
+      //performing zoomin animation
+      setTimeout(function() {
+        tile.style.scale = 1;
+        tile.style.opacity = 1;
+        return;
+      }, 100);
     }
   
     //render first time all cells into grid 
@@ -58,20 +62,41 @@ let GameGrid = (function () {
   
       document.querySelector('#game-grid').innerHTML = html;  
     }
+
+    //move all tiles up as possilble
+    moveTilesUp() {
+      
+    }
+
+    //move all tiles to down as possilbe
+    moveTilesDown() {
+
+    }
+
+    //move all tiles to right as possible
+    moveTilesRight() {
+
+    }
+
+    //move all tiles to left as possilbe
+    moveTilesLeft() {
+
+    }
   }
 
+  //creates instance only once
   function createInstance() {
-      let object = new GameGridFactory();
-      object.constructor = null;
-      return object;
+    let object = new GameGridFactory();
+    object.constructor = null;
+    return object;
   }
 
   return {
-      getInstance: function () {
-          if (!instance) {
-              instance = createInstance();
-          }
-          return instance;
+    getInstance: function () {
+      if (!instance) {
+        instance = createInstance();
       }
+      return instance;
+    }
   };
 })();

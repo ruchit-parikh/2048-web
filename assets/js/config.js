@@ -12,6 +12,9 @@ const cellHeight = document.querySelector('#game-grid').getBoundingClientRect().
 //intial numbers of tiles generated
 const startTilesCount = 2;
 
+//minimum drag difference required for touch inputs and mouse drags
+const drag = 25;
+
 //possible input values
 const inputs = {
   LEFT: 37, 
