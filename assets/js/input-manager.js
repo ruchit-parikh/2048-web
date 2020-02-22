@@ -40,14 +40,30 @@ let InputManager = (function () {
     listenForDragInputs() {
       let pos = document.querySelector('#game-grid').getBoundingClientRect();
       let startX, startY, endX, endY;
-      document.onmousedown = function(cursor) {
-        startX = cursor.clientX;
-        startY = cursor.clientY;
+      document.ontouchstart = dragStart;
+      document.ontouchmove = dragMove;
+      document.onmousedown = dragStart;
+      document.onmouseup = dragEnd;
+
+      //touch start
+      function dragStart(cursor) {
+        startX = cursor.clientX || cursor.touches[0].pageX;
+        startY = cursor.clientY || cursor.touches[0].pageY;
       }
 
-      document.onmouseup = function(cursor) {
-        endX = cursor.clientX;
-        endY = cursor.clientY;
+      //drag in process
+      function dragMove(cursor) {
+        endX = cursor.touches[0].pageX;
+        endY = cursor.touches[0].pageY;
+        dragEnd(cursor);
+      }
+
+      //touch end
+      function dragEnd(cursor) {
+        if (typeof cursor.touches == 'undefined') {
+          endX = cursor.clientX;
+          endY = cursor.clientY;
+        }
 
         //check if drag happens in grid or not
         if (
