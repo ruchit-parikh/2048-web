@@ -2,6 +2,7 @@ let InputManager = (function () {
   let instance;
   let grid = GameGrid.getInstance();
   
+  //private singleton factory
   class InputManagerFactory {
     constructor() {
       this.listenKeyboardInputs();
@@ -37,6 +38,7 @@ let InputManager = (function () {
 
     //listen to mouse or touch inputs
     listenForDragInputs() {
+      let pos = document.querySelector('#game-grid').getBoundingClientRect();
       let startX, startY, endX, endY;
       document.onmousedown = function(cursor) {
         startX = cursor.clientX;
@@ -47,11 +49,19 @@ let InputManager = (function () {
         endX = cursor.clientX;
         endY = cursor.clientY;
 
+        //check if drag happens in grid or not
+        if (
+          (startX < pos.left || startX > pos.right || startY < pos.top || startY > pos.down) &&
+          (endX < pos.left || endX > pos.right || endY < pos.top || endY > pos.down)
+        ) {
+          return;
+        }
+
         let horizontal = endX - startX;
         let vertical = endY - startY;
 
-        if (horizontal > drag || vertical > drag) {
-          if (horizontal > vertical) {
+        if (Math.abs(horizontal) > drag || Math.abs(vertical) > drag) {
+          if (Math.abs(horizontal) > Math.abs(vertical)) {
             //x-swipe
             if (endX > startX) {
               //right-swipe
@@ -75,6 +85,7 @@ let InputManager = (function () {
     }
   }
 
+  //creates instance only once
   function createInstance() {
     var object = new InputManagerFactory();
     object.constructor = null;

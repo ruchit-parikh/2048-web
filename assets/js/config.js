@@ -3,6 +3,7 @@ const grid = 4;
 
 //spot values are values which can be generated at each move
 const spotValues = [2, 4];
+const emptyCellValue = '';
 
 //compute const height and width of cells in the beginning to avoid computation at each move
 const cellMargin = 3;

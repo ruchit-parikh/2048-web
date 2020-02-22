@@ -4,7 +4,7 @@ let GameGrid = (function () {
   //private singleton factory
   class GameGridFactory {
     constructor() {
-      this.cells = new Array(Math.pow(grid, 2)).fill('');
+      this.cells = new Array(Math.pow(grid, 2)).fill(emptyCellValue);
       this.renderHTML();
       for (let i = 0; i < startTilesCount; ++i) {
         this.generateTile();
@@ -16,7 +16,7 @@ let GameGrid = (function () {
       let cells = [];
   
       this.cells.forEach((cell, key) => {
-        if (cell == '') {
+        if (cell == emptyCellValue) {
           cells.push(key);
         }
       });
@@ -34,6 +34,7 @@ let GameGrid = (function () {
       let tile = document.createElement('div');
       tile.classList.add('tile');
       tile.setAttribute('data-value', this.cells[tileIndex]);
+      tile.setAttribute('data-cell-no', tileIndex);
 
       //target where we will spawn this tile
       let target = document.querySelector('#game-grid .game-grid-cell:nth-child(' + (tileIndex + 1) + ')');
@@ -61,26 +62,262 @@ let GameGrid = (function () {
       }); 
   
       document.querySelector('#game-grid').innerHTML = html;  
+      document.querySelector('#game-grid-wrapper').style = "font-size: " + 80 / grid + "px;";
     }
 
+    //move tile from one pos to another
+    moveTile(from, to, mergeValue = emptyCellValue) {
+      if (this.cells[to] == emptyCellValue) {
+        //if cell is empty then we'll move tile to this position else we may merge or live as it is
+        this.cells[to] = this.cells[from];
+      }
+
+      //animate tile movement
+      let tile = document.querySelector('#filled-grid .tile[data-cell-no="'+ from + '"]');
+      let target = document.querySelector('#game-grid .game-grid-cell:nth-child(' + (to + 1) + ')');
+      if (mergeValue != emptyCellValue) {
+        tile.setAttribute('data-value', mergeValue);
+        document.querySelector('#filled-grid .tile[data-cell-no="' + to + '"]').remove();
+      }
+      tile.setAttribute('data-cell-no', to);
+      tile.style.transform = "translate(" + target.offsetLeft + "px, " + target.offsetTop + "px)";
+      this.cells[from] = emptyCellValue;
+    }
+
+    //merge from one tile into another tile 
+    mergeTiles(from, to) {
+      //cell is not empty so we are going to add our value in it.
+      this.cells[to] += this.cells[from];
+      this.moveTile(from, to, this.cells[to]);
+      this.cells[from] = emptyCellValue;
+    }
+ 
     //move all tiles up as possilble
     moveTilesUp() {
-      
+      let madeMove = false;
+      //first pass: we'll only check empty cells and move tiles into empty cells
+      for (let i = 0; i < this.cells.length; ++i) {
+        let curRow = parseInt(i / grid);
+        let curColumn = i % grid;
+        
+        if (this.cells[i] == emptyCellValue) {
+          //if cell is empty then we'll find all non empty element in same column and move them
+          for (let j = curRow + 1; j < grid; ++j) {
+            if (this.cells[j*grid + curColumn] != emptyCellValue) {
+              this.moveTile(j*grid + curColumn, i);
+              madeMove = true;
+              break;
+            }
+          }
+        } 
+      }
+
+      //second pass: we'll merge two same immediate tiles
+      for (let i = 0; i < this.cells.length; ++i) {
+        if (this.cells[i] != emptyCellValue) {
+          let curRow = parseInt(i / grid);
+          let curColumn = i % grid;
+          
+          //if both are same then we'll merge tiles else we continue
+          let immediateNext = (curRow + 1)*grid + curColumn;
+          if ((curRow + 1) < grid && this.cells[i] == this.cells[immediateNext]) {
+            this.mergeTiles(immediateNext, i);
+            madeMove = true;
+          }
+        }
+      }
+
+      //third pass: we'll only check empty cells remained after merge and move tiles into empty cells
+      for (let i = 0; i < this.cells.length; ++i) {
+        let curRow = parseInt(i / grid);
+        let curColumn = i % grid;
+        
+        if (this.cells[i] == emptyCellValue) {
+          //if cell is empty then we'll find all non empty element in same column and move them
+          for (let j = curRow + 1; j < grid; ++j) {
+            if (this.cells[j*grid + curColumn] != emptyCellValue) {
+              this.moveTile(j*grid + curColumn, i);
+              madeMove = true;
+              break;
+            }
+          }
+        } 
+      }
+
+      if (madeMove) {
+        this.generateTile();
+      }
     }
 
     //move all tiles to down as possilbe
     moveTilesDown() {
+      let madeMove = false;
+      //first pass: we'll only check empty cells and move tiles into empty cells
+      for (let i = this.cells.length - 1; i >= 0; --i) {
+        let curRow = parseInt(i / grid);
+        let curColumn = i % grid;
+        
+        if (this.cells[i] == emptyCellValue) {
+          //if cell is empty then we'll find all non empty element in same column and move them
+          for (let j = curRow - 1; j >= 0; --j) {
+            if (this.cells[j*grid + curColumn] != emptyCellValue) {
+              this.moveTile(j*grid + curColumn, i);
+              madeMove = true;
+              break;
+            }
+          }
+        } 
+      }
 
+      //second pass: we'll merge two same immediate tiles
+      for (let i = this.cells.length - 1; i >= 0; --i) {
+        if (this.cells[i] != emptyCellValue) {
+          let curRow = parseInt(i / grid);
+          let curColumn = i % grid;
+          
+          //if both are same then we'll merge tiles else we continue
+          let immediateNext = (curRow  - 1)*grid + curColumn;
+          if ((curRow - 1) >= 0 && this.cells[i] == this.cells[immediateNext]) {
+            this.mergeTiles(immediateNext, i);
+            madeMove = true;
+          }
+        }
+      }
+
+      //third pass: we'll only check empty cells remained after merge and move tiles into empty cells
+      for (let i = this.cells.length - 1; i >= 0; --i) {
+        let curRow = parseInt(i / grid);
+        let curColumn = i % grid;
+        
+        if (this.cells[i] == emptyCellValue) {
+          //if cell is empty then we'll find all non empty element in same column and move them
+          for (let j = curRow - 1; j >= 0; --j) {
+            if (this.cells[j*grid + curColumn] != emptyCellValue) {
+              this.moveTile(j*grid + curColumn, i);
+              madeMove = true;
+              break;
+            }
+          }
+        } 
+      }
+
+      if (madeMove) {
+        this.generateTile();
+      }
     }
 
     //move all tiles to right as possible
     moveTilesRight() {
+      let madeMove = false;
+      //first pass: we'll only check empty cells and move tiles into empty cells
+      for (let i = this.cells.length - 1; i >= 0; --i) {
+        let curRow = parseInt(i / grid);
+        let curColumn = i % grid;
+        
+        if (this.cells[i] == emptyCellValue) {
+          //if cell is empty then we'll find all non empty element in same row and move them
+          for (let j = curColumn - 1; j >= 0; --j) {
+            if (this.cells[curRow*grid + j] != emptyCellValue) {
+              this.moveTile(curRow*grid + j, i);
+              madeMove = true;
+              break;
+            }
+          }
+        } 
+      }
 
+      //second pass: we'll merge two same immediate tiles
+      for (let i = this.cells.length - 1; i >= 0; --i) {
+        if (this.cells[i] != emptyCellValue) {
+          let curRow = parseInt(i / grid);
+          let curColumn = i % grid;
+          
+          //if both are same then we'll merge tiles else we continue
+          let immediateNext = curRow*grid + curColumn - 1;
+          if ((curColumn - 1) >= 0 && this.cells[i] == this.cells[immediateNext]) {
+            this.mergeTiles(immediateNext, i);
+            madeMove = true;
+          }
+        }
+      }
+
+      //third pass: we'll only check empty cells remained after merge and move tiles into empty cells
+      for (let i = this.cells.length - 1; i >= 0; --i) {
+        let curRow = parseInt(i / grid);
+        let curColumn = i % grid;
+        
+        if (this.cells[i] == emptyCellValue) {
+          //if cell is empty then we'll find all non empty element in same row and move them
+          for (let j = curColumn - 1; j >= 0; --j) {
+            if (this.cells[curRow*grid + j] != emptyCellValue) {
+              this.moveTile(curRow*grid + j, i);
+              madeMove = true;
+              break;
+            }
+          }
+        } 
+      }
+
+      if (madeMove) {
+        this.generateTile();
+      }
     }
 
     //move all tiles to left as possilbe
     moveTilesLeft() {
+      let madeMove = false;
+      //first pass: we'll only check empty cells and move tiles into empty cells
+      for (let i = 0; i < this.cells.length; ++i) {
+        let curRow = parseInt(i / grid);
+        let curColumn = i % grid;
+        
+        if (this.cells[i] == emptyCellValue) {
+          //if cell is empty then we'll find all non empty element in same row and move them
+          for (let j = curColumn + 1; j < grid; ++j) {
+            if (this.cells[curRow*grid + j] != emptyCellValue) {
+              this.moveTile(curRow*grid + j, i);
+              madeMove = true;
+              break;
+            }
+          }
+        } 
+      }
 
+      //second pass: we'll merge two same immediate tiles
+      for (let i = 0; i < this.cells.length; ++i) {
+        if (this.cells[i] != emptyCellValue) {
+          let curRow = parseInt(i / grid);
+          let curColumn = i % grid;
+          
+          //if both are same then we'll merge tiles else we continue
+          let immediateNext = curRow*grid + curColumn + 1;
+          if ((curColumn + 1) < grid && this.cells[i] == this.cells[immediateNext]) {
+            this.mergeTiles(immediateNext, i);
+            madeMove = true;
+          }
+        }
+      }
+
+      //third pass: we'll only check empty cells remained after merge and move tiles into empty cells
+      for (let i = 0; i < this.cells.length; ++i) {
+        let curRow = parseInt(i / grid);
+        let curColumn = i % grid;
+        
+        if (this.cells[i] == emptyCellValue) {
+          //if cell is empty then we'll find all non empty element in same row and move them
+          for (let j = curColumn + 1; j < grid; ++j) {
+            if (this.cells[curRow*grid + j] != emptyCellValue) {
+              this.moveTile(curRow*grid + j, i);
+              madeMove = true;
+              break;
+            }
+          }
+        } 
+      }
+
+      if (madeMove) {
+        this.generateTile();
+      }
     }
   }
 

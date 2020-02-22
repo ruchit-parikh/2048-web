@@ -2864,6 +2864,10 @@ html, body {
   padding: 5px;
   background-color: #bbada0;
   margin-bottom: 1rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 #game-grid-wrapper #game-grid {
@@ -2928,91 +2932,91 @@ html, body {
 }
 
 #game-grid-wrapper #filled-grid .tile[data-value="2"] {
-  font-size: 2rem;
+  font-size: 2em;
   background-color: #eecaab;
   z-index: 2;
 }
 
 #game-grid-wrapper #filled-grid .tile[data-value="4"] {
-  font-size: 2rem;
+  font-size: 2em;
   background-color: #dbc397;
   z-index: 4;
 }
 
 #game-grid-wrapper #filled-grid .tile[data-value="8"] {
-  font-size: 2rem;
+  font-size: 2em;
   background-color: #f2b179;
   z-index: 8;
 }
 
 #game-grid-wrapper #filled-grid .tile[data-value="16"] {
-  font-size: 2rem;
+  font-size: 2em;
   background-color: #f59563;
   z-index: 16;
 }
 
 #game-grid-wrapper #filled-grid .tile[data-value="32"] {
-  font-size: 2rem;
+  font-size: 2em;
   background-color: #f67c5f;
   z-index: 32;
 }
 
 #game-grid-wrapper #filled-grid .tile[data-value="64"] {
-  font-size: 2rem;
+  font-size: 2em;
   background-color: #f65e3b;
   z-index: 64;
 }
 
 #game-grid-wrapper #filled-grid .tile[data-value="128"] {
-  font-size: 2rem;
+  font-size: 1.75em;
   background-color: #edcf72;
   z-index: 128;
 }
 
 #game-grid-wrapper #filled-grid .tile[data-value="256"] {
-  font-size: 2rem;
+  font-size: 1.75em;
   background-color: #edcf72;
   z-index: 256;
 }
 
 #game-grid-wrapper #filled-grid .tile[data-value="512"] {
-  font-size: 2rem;
+  font-size: 1.75em;
   background-color: #edcc61;
   z-index: 512;
 }
 
 #game-grid-wrapper #filled-grid .tile[data-value="1024"] {
-  font-size: 1.5rem;
+  font-size: 1.25em;
   background-color: #dbb539;
   z-index: 1024;
 }
 
 #game-grid-wrapper #filled-grid .tile[data-value="2048"] {
-  font-size: 1.5rem;
+  font-size: 1.25em;
   background-color: #e0b836;
   z-index: 2048;
 }
 
 #game-grid-wrapper #filled-grid .tile[data-value="4096"] {
-  font-size: 1.5rem;
+  font-size: 1.25em;
   background-color: #b3e036;
   z-index: 4096;
 }
 
 #game-grid-wrapper #filled-grid .tile[data-value="8192"] {
-  font-size: 1.5rem;
+  font-size: 1.25em;
   background-color: #acd930;
   z-index: 8192;
 }
 
 #game-grid-wrapper #filled-grid .tile[data-value="16384"] {
-  font-size: 1rem;
+  font-size: 1em;
   background-color: #aadb21;
   z-index: 16384;
 }
 
 #game-grid-wrapper #filled-grid .tile[data-value="32768"] {
-  font-size: 1rem;
+  font-size: 1em;
   background-color: #1e91d9;
   z-index: 32768;
 }

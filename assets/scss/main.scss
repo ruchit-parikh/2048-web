@@ -113,6 +113,7 @@
   padding: 5px;
   background-color: map-get($colors, secondary);
   margin-bottom: map-get($spacers, 3);
+  user-select: none;
 
   #game-grid {
     display: flex;
