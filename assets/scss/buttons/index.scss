@@ -1,0 +1,22 @@
+.btn {
+  padding: map-get($spacers, 2) map-get($spacers, 3);
+  border-radius: $border-radius;
+  color: map-get($colors, white);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: map-get($spacers, 2);
+  margin-bottom: map-get($spacers, 2);
+  
+  @each $color in map-keys($colors) {
+    &.btn-#{$color} {
+      background-color: map-get($colors, $color);
+    }
+  }
+
+  @each $color in map-keys($hover-colors) {
+    &.btn-#{$color}:hover {
+      background-color: map-get($hover-colors, $color);
+    }
+  }
+}

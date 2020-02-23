@@ -4,6 +4,11 @@ let GameGrid = (function () {
   //private singleton factory
   class GameGridFactory {
     constructor() {
+      this.reset();
+    }
+
+    //reset grid
+    reset() {
       this.cells = new Array(Math.pow(grid, 2)).fill(emptyCellValue);
       this.renderHTML();
       for (let i = 0; i < startTilesCount; ++i) {
@@ -27,30 +32,32 @@ let GameGrid = (function () {
     //generate random tile on empty cells available
     generateTile() {
       let emptyCells = this.getEmptyCells();
-      let tileIndex = emptyCells[Math.floor(Math.random()*emptyCells.length)];
-      this.cells[tileIndex] = spotValues[Math.floor(Math.random()*spotValues.length)];
-      
-      //create new tiles with value generated
-      let tile = document.createElement('div');
-      tile.classList.add('tile');
-      tile.setAttribute('data-value', this.cells[tileIndex]);
-      tile.setAttribute('data-cell-no', tileIndex);
+      if (emptyCells.length > 0) {
+        let tileIndex = emptyCells[Math.floor(Math.random()*emptyCells.length)];
+        this.cells[tileIndex] = spotValues[Math.floor(Math.random()*spotValues.length)];
+        
+        //create new tiles with value generated
+        let tile = document.createElement('div');
+        tile.classList.add('tile');
+        tile.setAttribute('data-value', this.cells[tileIndex]);
+        tile.setAttribute('data-cell-no', tileIndex);
 
-      //target where we will spawn this tile
-      let target = document.querySelector('#game-grid .game-grid-cell:nth-child(' + (tileIndex + 1) + ')');
-      let tileStyles = target.getClientRects()[0];
-      tile.style.width = tileStyles.width + 'px';
-      tile.style.height = tileStyles.height + 'px';
-      tile.style.transform = "translate(" + target.offsetLeft + "px, " + target.offsetTop + "px)";
-      tile.style.transformOrigin = target.offsetLeft + (tileStyles.width / 2) + 'px ' + (target.offsetTop + (tileStyles.height / 2)) + 'px';
-      document.querySelector('#filled-grid').append(tile);
+        //target where we will spawn this tile
+        let target = document.querySelector('#game-grid .game-grid-cell:nth-child(' + (tileIndex + 1) + ')');
+        let tileStyles = target.getClientRects()[0];
+        tile.style.width = tileStyles.width + 'px';
+        tile.style.height = tileStyles.height + 'px';
+        tile.style.transform = "translate(" + target.offsetLeft + "px, " + target.offsetTop + "px)";
+        tile.style.transformOrigin = target.offsetLeft + (tileStyles.width / 2) + 'px ' + (target.offsetTop + (tileStyles.height / 2)) + 'px';
+        document.querySelector('#filled-grid').append(tile);
 
-      //performing zoomin animation
-      setTimeout(function() {
-        tile.style.scale = 1;
-        tile.style.opacity = 1;
-        return;
-      }, 100);
+        //performing zoomin animation
+        setTimeout(function() {
+          tile.style.scale = 1;
+          tile.style.opacity = 1;
+          return;
+        }, 100);
+      }
     }
   
     //render first time all cells into grid 
@@ -63,6 +70,7 @@ let GameGrid = (function () {
   
       document.querySelector('#game-grid').innerHTML = html;  
       document.querySelector('#game-grid-wrapper').style = "font-size: " + 80 / grid + "px;";
+      document.querySelector('#filled-grid').innerHTML = '';
     }
 
     //move tile from one pos to another
@@ -318,6 +326,38 @@ let GameGrid = (function () {
       if (madeMove) {
         this.generateTile();
       }
+    }
+
+    //check if tiles can be moved or not 
+    //used to check if game is over or not
+    isTilesMovable() {
+      //check if any cell is empty then return true as tiles are movable
+      for (let cell of this.cells) {
+        if (cell == emptyCellValue) {
+          return true;
+        }
+      }
+
+      //all cells are filled and no neighboured cell has same values then return false
+      for (let i in this.cells) {
+        let row = parseInt(i / grid);
+        let col = i % grid;
+        //check if two sequencial cells in a same row are matching or not
+        if (col != (grid - 1)) {
+          if (this.cells[i] == this.cells[i + 1]) {
+            return true;
+          } 
+        }
+
+        //check if two sequencial cells in a same column are matching or not
+        if (row != (grid - 1)) {
+          if (this.cells[i] == this.cells[(row + 1)*grid + col]) {
+            return true;
+          }
+        }
+      }
+
+      return false;
     }
   }
 

@@ -23,12 +23,18 @@
                 </div>
                 <div id="filled-grid">
                 </div>
+                <div id="game-over">
+                  <h3 class="game-over-title">Game Over</h3>
+                  <span class="score-label">Your Score: <span class="current-score">0</span></span>
+                  <span class="score-label">Your Best Score: <span class="best-score">0</span></span>
+                  <a class="btn btn-primary" href="javascript:void(0)" onclick="restart();">Play Again!</a>
+                </div>
               </div>
             </div>
             <div class="col-sm-6 col-md-5 col-xl-6">
               <h4 class="heading">Name: <span id="player-name" class="float-right">King Riyo</span></h4>
-              <span class="label-block">Score: <span id="current-score">0</span></span>
-              <span class="label-block">Best: <span id="best-score">0</span></span>
+              <span class="label-block">Score: <span class="current-score">0</span></span>
+              <span class="label-block">Best: <span class="best-score">0</span></span>
             </div>
           </div>
         </div>
@@ -98,6 +104,7 @@
 
   <script src="assets/js/config.js"></script>
   <script src="assets/js/game-grid.js"></script>
+  <script src="assets/js/score-manager.js"></script>
   <script src="assets/js/input-manager.js"></script>
   <script src="assets/js/game-manager.js"></script>
   <script src="assets/js/main.js"></script>

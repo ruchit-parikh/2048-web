@@ -2,8 +2,7 @@
     "version": 3,
     "mappings": "",
     "sources": [
-        "../scss/grid/index.scss",
-        "../scss/grid/_mixins.scss"
+        "../scss/buttons/index.scss"
     ],
     "names": [],
     "file": "index.css"

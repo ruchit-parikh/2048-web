@@ -26,9 +26,20 @@ $colors: (
   white: #fff,
   light: #f0f0f0,
   gray: rgba(238, 228, 218, 0.35),
+  dark-gray: rgba(157, 156, 155, 0.77),
   primary: #8f7a66,
   secondary: #bbada0,
-  ternary: rgba(98, 98, 98, 0.35) 
+  ternary: rgba(98, 98, 98, 0.35),
+) !default;
+
+$hover-colors: (
+  white: rgba(238, 228, 218, 0.35),
+  light: rgba(157, 156, 155, 0.77),
+  gray: #fff,
+  dark-gray: #f0f0f0,
+  primary: #bbada0,
+  secondary: rgba(98, 98, 98, 0.35),
+  ternary: #8f7a66
 ) !default;
 
 $number-colors: (

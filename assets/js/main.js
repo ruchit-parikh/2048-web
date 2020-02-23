@@ -5,5 +5,10 @@
 
 //initialize game and setup everything that needs
 function init() {
-  return new GameManager();
+  return GameManager.getInstance();
+}
+
+//restarts the game
+function restart() {
+  return GameManager.getInstance().restart();
 }

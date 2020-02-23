@@ -1,6 +1,7 @@
 let InputManager = (function () {
   let instance;
   let grid = GameGrid.getInstance();
+  let scoreManager = ScoreManager.getInstance();
   
   //private singleton factory
   class InputManagerFactory {
@@ -32,6 +33,14 @@ let InputManager = (function () {
           case inputs.S:
             grid.moveTilesDown();
             break;
+        }
+        
+        //update scores after each move
+        scoreManager.updateScore();
+
+        //check if game is over or not and end game if it's over
+        if (!grid.isTilesMovable()) {
+          gameOver();
         }
       } 
     }
@@ -96,6 +105,14 @@ let InputManager = (function () {
               grid.moveTilesUp();
             }
           }
+
+          //update scores after each move
+          scoreManager.updateScore();
+          
+          //check if game is over or not and end game if it's over
+          if (!grid.isTilesMovable()) {
+            gameOver();
+          }
         }
       }
     }
@@ -117,3 +134,9 @@ let InputManager = (function () {
     }
   };
 })();
+
+//game over
+function gameOver() {
+  let gameOver = document.querySelector('#game-over');
+  gameOver.style.opacity = 1;
+}
