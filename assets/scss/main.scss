@@ -44,47 +44,61 @@
   }
 }
 
-#leaderboard .list {
-  list-style: none;
-  padding: 0;
-  counter-reset: rank;
+#leaderboard {
+  position: relative;
+  .list {
+    list-style: none;
+    padding: 0;
+    counter-reset: rank;
 
-  .list-item {
-    display: flex;
-    align-items: center;
-    padding: 25px;
-    background-color: map-get($colors, ternary);
-    margin-bottom: 10px;
-    color: map-get($colors, white);
-    font-weight: 900;
-    box-shadow: 2px 2px 1px map-get($colors, gray);
-    border: $border-width solid map-get($colors, white);
-    border-radius: $border-radius;
+    .list-item {
+      display: flex;
+      align-items: center;
+      padding: 25px;
+      background-color: map-get($colors, ternary);
+      margin-bottom: 10px;
+      color: map-get($colors, white);
+      font-weight: 900;
+      box-shadow: 2px 2px 1px map-get($colors, gray);
+      border: $border-width solid map-get($colors, white);
+      border-radius: $border-radius;
 
-    .name {
-      text-transform: uppercase;
-      font-size: $font-size;
-      letter-spacing: $letter-spacing;
-      width: 8rem;
-      @extend %text-ellipsis;
-      
-      @include media-breakpoint-down(md) {
-        width: 5rem;
+      .name {
+        text-transform: uppercase;
+        font-size: $font-size;
+        letter-spacing: $letter-spacing;
+        width: 8rem;
+        @extend %text-ellipsis;
+        
+        @include media-breakpoint-down(md) {
+          width: 5rem;
+        }
+      }
+
+      .points {
+        margin-left: auto;
+        text-align: right;
+        width: 8rem;
+        @extend %text-ellipsis
+      }
+
+      &::before {
+        counter-increment: rank;
+        content: counter(rank);
+        margin-right: 5px;
       }
     }
+  }
 
-    .points {
-      margin-left: auto;
-      text-align: right;
-      width: 8rem;
-      @extend %text-ellipsis
-    }
-
-    &::before {
-      counter-increment: rank;
-      content: counter(rank);
-      margin-right: 5px;
-    }
+  #login-form {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    z-index: 10;
+    background-color: map-get($colors, secondary);
   }
 }
 

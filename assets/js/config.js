@@ -27,3 +27,7 @@ const inputs = {
   A: 65,
   D: 68
 }
+
+//cookie names
+bestScoreCookie = 'best';
+playerNameCookie = 'name';

@@ -339,12 +339,12 @@ let GameGrid = (function () {
       }
 
       //all cells are filled and no neighboured cell has same values then return false
-      for (let i in this.cells) {
+      for (let i = 0; i < this.cells.length; ++i) {
         let row = parseInt(i / grid);
         let col = i % grid;
         //check if two sequencial cells in a same row are matching or not
         if (col != (grid - 1)) {
-          if (this.cells[i] == this.cells[i + 1]) {
+          if (this.cells[i] == this.cells[row*grid + col + 1]) {
             return true;
           } 
         }

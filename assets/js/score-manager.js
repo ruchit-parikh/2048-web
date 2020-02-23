@@ -6,6 +6,7 @@ let ScoreManager = (function() {
   class ScoreManagerFactory {
     constructor() {
       this.score = 0;
+      this.best = 0;
     }
 
     //resets the score
@@ -27,12 +28,31 @@ let ScoreManager = (function() {
       this.setScoreHTML();
     }
 
+    //checks if current score is greater than best and if yes then set it to best
+    updateBestIfPossilble() {
+      if (this.score > this.best) {
+        this.best = this.score;
+        DataManager.getInstance().store(bestScoreCookie, this.best);
+      }
+    }
+
+    //sets current best score
+    setCurrentBest(score) {
+      this.best = score;
+      this.setScoreHTML();
+    }
+
     //sets score display values
     setScoreHTML() {
-      let score = this.score;
+      let score = this.score, bestScore = this.best;
       //change current score display value
       document.querySelectorAll('.current-score').forEach(element => {
         element.innerHTML = score;
+      });
+
+      //change best score display value
+      document.querySelectorAll('.best-score').forEach(element => {
+        element.innerHTML = bestScore;
       });
     }
   }

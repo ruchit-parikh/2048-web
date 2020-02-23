@@ -139,4 +139,5 @@ let InputManager = (function () {
 function gameOver() {
   let gameOver = document.querySelector('#game-over');
   gameOver.style.opacity = 1;
+  ScoreManager.getInstance().updateBestIfPossilble();
 }
