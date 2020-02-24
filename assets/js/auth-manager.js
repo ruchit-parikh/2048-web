@@ -2,18 +2,16 @@ let AuthManager = (function() {
   let instance;
 
   //private singleton factory
-  class AuthManagerFactory {
-    constructor() {
-      this.token = getCookie('bearer');
-    }
+  var AuthManagerFactory = function() {
+    this.token = getCookie('bearer');
+  }
 
-    //check if user is loggedin or not
-    isLoggedIn() {
-      if (this.token) {
-        //user has token verify it if it's expired or not
-      } else {
-        return false;
-      }
+  //check if user is loggedin or not
+  AuthManagerFactory.prototype.isLoggedIn = function() {
+    if (this.token) {
+      //user has token verify it if it's expired or not
+    } else {
+      return false;
     }
   }
 

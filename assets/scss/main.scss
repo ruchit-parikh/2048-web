@@ -4,6 +4,7 @@
 @import "grid/index";
 @import "utilities/index";
 @import "buttons/index";
+@import "forms/index";
 @import "setup/index";
 
 %text-ellipsis {
@@ -46,6 +47,7 @@
 
 #leaderboard {
   position: relative;
+  
   .list {
     list-style: none;
     padding: 0;
@@ -97,6 +99,7 @@
     width: 100%;
     height: 100%;
     margin: 0px;
+    min-height: 60vh;
     z-index: 10;
     background-color: map-get($colors, secondary);
   }
@@ -169,8 +172,8 @@
       font-size: 1rem;
       background-color: map-get($colors, ternary);
       opacity: 0;
-      scale: 0;
-      transition: all 0.1s;
+      transform: scale(0);
+      transition: all 0.15s;
 
       &::before {
         content: attr(data-value);
@@ -201,7 +204,7 @@
     background-color: map-get($colors, dark-gray);
     opacity: 0;
     z-index: 99;
-    transition: all 0.1s;
+    transition: all 0.15s;
 
     .game-over-title {
       margin: map-get($spacers, 2);

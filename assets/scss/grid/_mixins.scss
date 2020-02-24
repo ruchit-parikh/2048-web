@@ -2,6 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  overflow: hidden;
 }
 
 @mixin create-col($size, $columns: $grid-columns) {
@@ -26,7 +27,6 @@
         & > *:not(.row) {
           margin-left: map-get($spacers, 4);
           margin-right: map-get($spacers, 4);
-          box-sizing: border-box;
         }
       }
     }

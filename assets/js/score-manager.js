@@ -3,59 +3,60 @@ let ScoreManager = (function() {
   let grid = GameGrid.getInstance();
 
   //private singleton factory
-  class ScoreManagerFactory {
-    constructor() {
-      this.score = 0;
-      this.best = 0;
-    }
+  var ScoreManagerFactory = function() {
+    this.score = 0;
+    this.best = 0;
+  }
 
-    //resets the score
-    reset() {
-      this.score = 0;
-      this.setScoreHTML();
-    }
+  //resets the score
+  ScoreManagerFactory.prototype.reset = function() {
+    this.score = 0;
+    this.setScoreHTML();
+  }
 
-    //update scores
-    updateScore() {
-      let score = 0;
-      for (let cell of grid.cells) {
-        if (cell != emptyCellValue) {
-          score += cell;
-        }
-      }
-      
-      this.score = score;
-      this.setScoreHTML();
-    }
-
-    //checks if current score is greater than best and if yes then set it to best
-    updateBestIfPossilble() {
-      if (this.score > this.best) {
-        this.best = this.score;
-        DataManager.getInstance().store(bestScoreCookie, this.best);
+  //update scores
+  ScoreManagerFactory.prototype.updateScore = function() {
+    let sum = 0;
+    for (let i = 0; i < grid.cells.length; ++i) {
+      if (grid.cells[i] != emptyCellValue) {
+        sum += parseInt(grid.cells[i]);
       }
     }
 
-    //sets current best score
-    setCurrentBest(score) {
-      this.best = score;
-      this.setScoreHTML();
-    }
+    this.score = sum;
+    this.setScoreHTML();
+  }
 
-    //sets score display values
-    setScoreHTML() {
-      let score = this.score, bestScore = this.best;
-      //change current score display value
-      document.querySelectorAll('.current-score').forEach(element => {
-        element.innerHTML = score;
-      });
-
-      //change best score display value
-      document.querySelectorAll('.best-score').forEach(element => {
-        element.innerHTML = bestScore;
-      });
+  //checks if current score is greater than best and if yes then set it to best
+  ScoreManagerFactory.prototype.updateBestIfPossilble = function() {
+    if (this.score > this.best) {
+      this.best = this.score;
+      DataManager.getInstance().store(bestScoreCookie, this.best);
     }
   }
+
+  //sets current best score
+  ScoreManagerFactory.prototype.setCurrentBest = function(score) {
+    this.best = score;
+    this.setScoreHTML();
+  }
+
+  //sets score display values
+  ScoreManagerFactory.prototype.setScoreHTML = function() {
+    let score = this.score, bestScore = this.best;
+    //change current score display value
+    let scoreNodes = document.querySelectorAll('.current-score');
+    for (let i in scoreNodes) {
+      scoreNodes[i].innerHTML = score;
+    }
+
+    //change best score display value
+    scoreNodes = document.querySelectorAll('.best-score');
+    for (let i in scoreNodes) {
+      scoreNodes[i].innerHTML = bestScore;
+    }
+  }
+  
 
   //create instance only once
   function createInstance() {

@@ -5,6 +5,7 @@
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   width: 100%;
+  overflow: hidden;
 }
 
 .row .col-1, .row .col-2, .row .col-3, .row .col-4, .row .col-5, .row .col-6, .row .col-7, .row .col-8, .row .col-9, .row .col-10, .row .col-11, .row .col-12, .row .col-sm-1, .row .col-sm-2, .row .col-sm-3, .row .col-sm-4, .row .col-sm-5, .row .col-sm-6, .row .col-sm-7, .row .col-sm-8, .row .col-sm-9, .row .col-sm-10, .row .col-sm-11, .row .col-sm-12, .row .col-md-1, .row .col-md-2, .row .col-md-3, .row .col-md-4, .row .col-md-5, .row .col-md-6, .row .col-md-7, .row .col-md-8, .row .col-md-9, .row .col-md-10, .row .col-md-11, .row .col-md-12, .row .col-lg-1, .row .col-lg-2, .row .col-lg-3, .row .col-lg-4, .row .col-lg-5, .row .col-lg-6, .row .col-lg-7, .row .col-lg-8, .row .col-lg-9, .row .col-lg-10, .row .col-lg-11, .row .col-lg-12, .row .col-xl-1, .row .col-xl-2, .row .col-xl-3, .row .col-xl-4, .row .col-xl-5, .row .col-xl-6, .row .col-xl-7, .row .col-xl-8, .row .col-xl-9, .row .col-xl-10, .row .col-xl-11, .row .col-xl-12 {
@@ -15,85 +16,61 @@
 .row .col-1 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-2 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-3 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-4 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-5 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-6 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-7 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-8 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-9 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-10 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-11 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-12 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-1 {
@@ -183,85 +160,61 @@
 .row .col-sm-1 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-sm-2 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-sm-3 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-sm-4 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-sm-5 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-sm-6 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-sm-7 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-sm-8 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-sm-9 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-sm-10 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-sm-11 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-sm-12 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 @media (min-width: 576px) {
@@ -342,85 +295,61 @@
 .row .col-md-1 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-md-2 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-md-3 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-md-4 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-md-5 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-md-6 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-md-7 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-md-8 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-md-9 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-md-10 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-md-11 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-md-12 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 @media (min-width: 768px) {
@@ -501,85 +430,61 @@
 .row .col-lg-1 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-lg-2 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-lg-3 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-lg-4 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-lg-5 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-lg-6 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-lg-7 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-lg-8 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-lg-9 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-lg-10 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-lg-11 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-lg-12 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 @media (min-width: 992px) {
@@ -660,85 +565,61 @@
 .row .col-xl-1 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-xl-2 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-xl-3 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-xl-4 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-xl-5 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-xl-6 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-xl-7 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-xl-8 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-xl-9 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-xl-10 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-xl-11 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 .row .col-xl-12 > *:not(.row) {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
 }
 
 @media (min-width: 1200px) {
@@ -2765,7 +2646,12 @@
 }
 
 .btn {
-  padding: 0.5rem 1rem;
+  display: inline-block;
+  border: 0px;
+  -webkit-box-shadow: 1px 1px 1px rgba(238, 228, 218, 0.35);
+          box-shadow: 1px 1px 1px rgba(238, 228, 218, 0.35);
+  text-align: center;
+  padding: 0.5rem 1.5rem;
   border-radius: 10px;
   color: #fff;
   text-decoration: none;
@@ -2831,12 +2717,33 @@
   background-color: #8f7a66;
 }
 
+form .form-group {
+  margin-bottom: 0.5rem;
+}
+
+form .form-group input {
+  border-radius: 5px;
+  border: 0px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 0.5rem;
+}
+
+form .form-group input.form-control {
+  width: 100%;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
 html, body {
   margin: 0px;
   padding: 0px;
   font-size: 18px;
   letter-spacing: 1px;
-  font-family: "sans-serif";
+  font-family: sans-serif;
 }
 
 #leaderboard .list .list-item .name, #leaderboard .list .list-item .points, .label-block .current-score,
@@ -2945,6 +2852,7 @@ html, body {
   width: 100%;
   height: 100%;
   margin: 0px;
+  min-height: 60vh;
   z-index: 10;
   background-color: #bbada0;
 }
@@ -3039,9 +2947,10 @@ html, body {
   font-size: 1rem;
   background-color: rgba(98, 98, 98, 0.35);
   opacity: 0;
-  scale: 0;
-  -webkit-transition: all 0.1s;
-  transition: all 0.1s;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: all 0.15s;
+  transition: all 0.15s;
 }
 
 #game-grid-wrapper #filled-grid .tile::before {
@@ -3161,8 +3070,8 @@ html, body {
   background-color: rgba(157, 156, 155, 0.77);
   opacity: 0;
   z-index: 99;
-  -webkit-transition: all 0.1s;
-  transition: all 0.1s;
+  -webkit-transition: all 0.15s;
+  transition: all 0.15s;
 }
 
 #game-grid-wrapper #game-over .game-over-title {

@@ -1,5 +1,9 @@
 .btn {
-  padding: map-get($spacers, 2) map-get($spacers, 3);
+  display: inline-block;
+  border: 0px;
+  box-shadow: 1px 1px 1px map-get($colors, gray);
+  text-align: center;
+  padding: map-get($spacers, 2) map-get($spacers, 4);
   border-radius: $border-radius;
   color: map-get($colors, white);
   text-decoration: none;

@@ -39,22 +39,50 @@
           </div>
         </div>
         <div class="col-lg-4 bg-secondary" id="leaderboard">
-          <h2 class="heading">
-            Top <span id="scores-count">50</span> Scores
-          </h2>
-          <ul class="list">
-            <li class="list-item">
-              <span class="name">Ruchit Parikh</span>
-              <span class="points">9999</span>
-            </li>
-          </ul>
-          <div id="login-form"></div>
+          <div id="list-container">
+            <h2 class="heading">
+              Top <span id="scores-count">50</span> Scores
+            </h2>
+            <ul class="list">
+              <li class="list-item">
+                <span class="name">Ruchit Parikh</span>
+                <span class="points">9999</span>
+              </li>
+            </ul>
+          </div>
+          <div id="login-form">
+            <div class="row">
+              <div class="col-md-12">
+                <h2 class="heading">Sign In To Leaderboard</h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <form action="login.php" method="post">
+                  <div class="form-group">
+                    <input class="form-control" name="email" type="email" placeholder="Email" required>
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" name="password" type="password" minlength="8" maxlength="32" placeholder="Password" required>
+                  </div>
+                  <button href="javascript:void(0)" type="submit" class="btn btn-ternary btn-login">Sign In</button>
+                  <a href="javascript:void(0)" class="btn btn-ternary btn-register">Register</a>
+                </form>
+              </div>
+            </div>
+            <div class="row my-3">
+              <div class="col-md-12 text-center text-white" style="font-weight: 600;">
+                &copy;<script type="text/javascript">document.write(new Date().getFullYear())</script> Made With Love By Riyo
+              </div>
+            </div>
+          </div>
         </div>  
       </div>
     </section>
   </main>
 
   <script src="assets/js/config.js"></script>
+  <script src="assets/js/polyfill.js"></script>
   <script src="assets/js/helpers.js"></script>
   <script src="assets/js/auth-manager.js"></script>
   <script src="assets/js/data-manager.js"></script>

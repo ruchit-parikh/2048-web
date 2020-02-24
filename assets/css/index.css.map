@@ -2,7 +2,7 @@
     "version": 3,
     "mappings": "",
     "sources": [
-        "../scss/buttons/index.scss"
+        "../scss/forms/index.scss"
     ],
     "names": [],
     "file": "index.css"

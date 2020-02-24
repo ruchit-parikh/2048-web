@@ -1,0 +1,16 @@
+form {
+
+  .form-group {
+    margin-bottom: map-get($spacers, 2);
+
+    input {
+      border-radius: 5px;
+      border: 0px;
+      box-sizing: border-box;
+      padding: map-get($spacers, 2);
+      &.form-control {
+        width: 100%;
+      }
+    }
+  }
+}
