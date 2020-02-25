@@ -2794,6 +2794,19 @@ html, body {
 
 #leaderboard {
   position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  #leaderboard {
+    min-height: 50vh;
+  }
+}
+
+@media (max-width: 575px) {
+  #leaderboard {
+    min-height: 100vh;
+  }
 }
 
 #leaderboard .list {
@@ -2845,7 +2858,8 @@ html, body {
   margin-right: 5px;
 }
 
-#leaderboard #login-form {
+#leaderboard #login-form,
+#leaderboard #register-form {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -2853,8 +2867,36 @@ html, body {
   height: 100%;
   margin: 0px;
   min-height: 60vh;
-  z-index: 10;
   background-color: #bbada0;
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+
+#leaderboard #login-form {
+  z-index: 10;
+}
+
+#leaderboard #register-form {
+  left: 100%;
+  z-index: 20;
+}
+
+#leaderboard #messages {
+  position: absolute;
+  bottom: -100px;
+  left: 0px;
+  line-height: 1.5rem;
+  width: 90%;
+  padding: 10px;
+  z-index: 30;
+  background-color: rgba(98, 98, 98, 0.35);
+  margin: 0 5%;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 5px;
+  opacity: 0;
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
 }
 
 .label-block {

@@ -31,3 +31,6 @@ const inputs = {
 //cookie names
 bestScoreCookie = 'best';
 playerNameCookie = 'name';
+
+//api url
+baseUrl = 'http://localhost/2048-web/api/v1/';

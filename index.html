@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2048 | Web Game</title>
   <link rel="stylesheet" href="assets/css/main.css">
@@ -65,8 +66,8 @@
                   <div class="form-group">
                     <input class="form-control" name="password" type="password" minlength="8" maxlength="32" placeholder="Password" required>
                   </div>
-                  <button href="javascript:void(0)" type="submit" class="btn btn-ternary btn-login">Sign In</button>
-                  <a href="javascript:void(0)" class="btn btn-ternary btn-register">Register</a>
+                  <button href="javascript:void(0)" type="submit" class="btn btn-ternary btn-submit">Sign In</button>
+                  <a href="javascript:void(0)" class="btn btn-ternary" onclick="loadRegisterForm(true)">Register</a>
                 </form>
               </div>
             </div>
@@ -76,6 +77,39 @@
               </div>
             </div>
           </div>
+          <div id="register-form">
+            <div class="row">
+              <div class="col-md-12">
+                <h2 class="heading">Register For New User</h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <form action="register.php" method="post">
+                  <div class="form-group">
+                    <input class="form-control" name="name" type="text" placeholder="Your Name" required>
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" name="email" type="email" placeholder="Email" required>
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" name="password" type="password" minlength="8" maxlength="32" placeholder="Password" required>
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" name="confirm-password" type="password" minlength="8" maxlength="32" placeholder="Confirm Password" required>
+                  </div>
+                  <a href="javascript:void(0)" class="btn btn-ternary" onclick="loadRegisterForm(false)">Back</a>
+                  <button href="javascript:void(0)" type="submit" class="btn btn-ternary btn-submit">Register</button>
+                </form>
+              </div>
+            </div>
+            <div class="row my-3">
+              <div class="col-md-12 text-center text-white" style="font-weight: 600;">
+                &copy;<script type="text/javascript">document.write(new Date().getFullYear())</script> Made With Love By Riyo
+              </div>
+            </div>
+          </div>
+          <div id="messages">There is some error processing your request!</div>
         </div>  
       </div>
     </section>
