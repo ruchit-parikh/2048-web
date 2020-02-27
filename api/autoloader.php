@@ -15,6 +15,11 @@ class Autoloader
 	}
 }
 
+//loading configs for database
+require_once('Database/config.php');
+
+//autloading of classes
 Autoloader::register();
 
-require_once('v1/routes.php');
+//loading routes files
+require_once('Routes/api.php');

@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 define('APPNAME', '2048 WEB');
 
 //application homepage url
-define('APPURL', 'http://localhost/2048-web');
+define('APPURL', 'http://localhost/2048-web/api/v1');
 
 //Database host name 
 define('DBHOST','http://localhost');

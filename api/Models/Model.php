@@ -1,8 +1,9 @@
 <?php
 
-namespace models;
+namespace Models;
 
-use database\Connection as DatabaseConnection;
+use Database\Connection as DatabaseConnection;
+use DateTime;
 use Exception;
 
 class Model 
@@ -44,6 +45,9 @@ class Model
 			foreach ($data as $key => $value) {
 				$model->columns[$key] = $value;
 			}
+			$model->columns['created_at'] = new DateTime();
+			$model->columns['updated_at'] = new DateTime();
+			
 			$model->store();
 			
 			return $model;
