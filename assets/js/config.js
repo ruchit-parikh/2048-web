@@ -33,4 +33,4 @@ bestScoreCookie = 'best';
 playerNameCookie = 'name';
 
 //api url
-baseUrl = 'http://localhost/2048-web/api/v1/';
+baseUrl = 'http://127.0.0.1/2048-web/api/v1/';

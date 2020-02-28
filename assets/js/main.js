@@ -51,31 +51,10 @@ function ajaxSubmit() {
     formData[data[i].getAttribute('name')] = data[i].value;
   }
 
-  postData(baseUrl + actionUrl, formData);
-}
+  postData(baseUrl + actionUrl, formData, function(response) {
+    //on success
 
-//post form data on specific url
-async function postData(url = '', data = {}) {
-  //post data on api url
-  let response = await fetch(url, {
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    mode: 'cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-    redirect: 'follow',
-    referrerPolicy: 'no-referrer',
-    method: 'POST',
-    body: JSON.stringify(data),
-  }).then(function(response) {
-    if (!response.ok) {
-      //some kind of error in request
-      throw Error(response);
-    } else {
-
-    }
-  }).catch(function(error) {
+  }, function(error) {
     //onerror
     let messages = document.querySelector('#messages');
     messages.style.bottom = '10px';
@@ -85,6 +64,31 @@ async function postData(url = '', data = {}) {
       messages.style.bottom = '-100px';
       messages.style.opacity = 0;
     }, 4000);
+  });
+}
+
+//post form data on specific url
+async function postData(url = '', data = {}, onsuccess, onerror) {
+  //post data on api url
+  let response = await fetch(url, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    mode: 'cors',
+    cache: 'no-cache',
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+    method: 'POST',
+    body: JSON.stringify(data),
+  }).then(function(response) {
+    if (!response.ok) {
+      //some kind of error in request
+      throw Error(response);
+    } else {
+      onsuccess(response);
+    }
+  }).catch(function(error) {
+    onerror(error);
   });
 
   return await response.json();

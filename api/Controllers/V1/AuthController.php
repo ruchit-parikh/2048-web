@@ -16,6 +16,10 @@ class AuthController extends Controller
 	 */
 	public function login(Request $request)
 	{
+		$request->validate([
+			'email' => ['required', 'email'], 
+			'password' => ['required']
+		]);
 		return $this->__loginAttempt($request->email, $request->password);
 	}
 
@@ -27,9 +31,15 @@ class AuthController extends Controller
 	 */
 	public function register(Request $request)
 	{
+		$request->validate([
+			'name' => ['required'], 
+			'email' => ['required', 'email', 'unique:users,email'], 
+			'password' => ['required', 'min:8', 'max:32', 'confirmed'], 
+			'confirm_password' => ['required', 'min:8', 'max:32']
+		]);
 		$request->password = md5($request->password);
-		$user = User::create($request->only('name', 'email', 'password'));
-		return $this->__loginAttempt($user->columns['email'], $user->column['password']);
+		$user = User::create($request->only(['name', 'email', 'password']));
+		return $this->__loginAttempt($user->columns['email'], $user->columns['password']);
 	}
 
 	/**

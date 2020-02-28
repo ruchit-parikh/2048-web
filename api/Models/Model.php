@@ -15,14 +15,14 @@ class Model
 
 	//columns that are available in your model
 	//this will be mostly overrided on child class
-	protected $columns;
+	public $columns;
 
 	//fields that can not be filled any way 
 	//these fields are going to take values by Storage Engine (default values or index)
 	protected $guarded;
 
 	// constructor with $db as database connection
-	public function __construct()
+	protected function __construct()
 	{
 		$this->connection = DatabaseConnection::getInstance();
 		$this->table = $this->__plural(get_class($this));
@@ -34,7 +34,7 @@ class Model
 	 * @param array|mixed 
 	 * @return Model|false
 	 */
-	protected static function create($data)
+	public static function create($data)
 	{
 		$model_name = get_called_class();
 		
@@ -60,14 +60,14 @@ class Model
 	 * @param void
 	 * @return boolean
 	 */
-	protected function store()
+	public function store()
 	{
 		if (array_key_exists('id', $this->columns)) {
 			//update query
 			return $this->update($this->columns);
 		} else {
 			//insert query
-			return get_called_class()::insert($this);
+			return $this::insert([$this]);
 		}
 	}
 
@@ -77,28 +77,28 @@ class Model
 	 * @param array
 	 * @return boolean
 	 */
-	protected static function insert(Model $models)
+	public static function insert(array $models)
 	{
 		try {
 			$statement = '';
 			
 			foreach ($models as $model) {
-				$statement .= 'INSERT INTO '.$model->table;
+				$statement .= ('INSERT INTO '.$model->table);
 				$keys = '';
 				$values = '';
 
-				foreach ($model as $key => $value) {
+				foreach ($model->columns as $key => $value) {
 					if (array_key_exists($key, $model->guarded)) {
 						throw new Exception("Key is in guarded mode! You cannot fill it.");
 					}
 
-					$keys .= "$key".' ,';
-					$values .= '"'.$value.'"'.' ,';
+					$keys .= $key.',';
+					$values .= '"'.$value.'",';
 				}
 
 				$statement .= ' ('.rtrim($keys, ',').') VALUES ('.rtrim($values, ',').'); ';
 			}
-			$this->connection->query($statement);
+			DatabaseConnection::getInstance()->query($statement);
 			return true;
 		} catch (Exception $e) {
 			echo "Failed to insert data in database. Error Details: ".$e->getMessage();
@@ -112,7 +112,7 @@ class Model
 	 * @param array
 	 * @return boolean
 	 */
-	protected function update($data)
+	public function update($data)
 	{
 		try {
 			$statement = 'UPDATE '.$this->table.' SET ';
@@ -141,6 +141,7 @@ class Model
 	 */
 	private function __plural(string $class_name)
 	{
-		return $class_name[strlen($class_name) - 1] == 's' ? $class_name.'es' : $class_name.'s';
+		$class_name = substr($class_name, strpos($class_name, '\\') + 1);
+		return strtolower($class_name[strlen($class_name) - 1] == 's' ? $class_name.'es' : $class_name.'s');
 	}
 }

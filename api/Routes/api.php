@@ -4,5 +4,19 @@ namespace Routes;
 
 use Routes\Route;
 
+if (isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN'] != '') {
+    $allowed_urls = ['http://127.0.0.1', 'http://localhost'];
+
+    foreach ($allowed_urls as $url) {
+        if ($url == $_SERVER['HTTP_ORIGIN']) {
+            header('Access-Control-Allow-Origin: '.$url);
+            header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+            header('Access-Control-Max-Age: 1000');
+            header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+            break;
+        }
+    }
+}
+
 Route::post('/register', 'V1\AuthController', 'register');
 Route::post('/login', 'V1\AuthController', 'login');

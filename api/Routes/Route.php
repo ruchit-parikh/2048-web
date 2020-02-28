@@ -24,7 +24,7 @@ class Route
 	{
 		try {
 			if ($_SERVER['REQUEST_METHOD'] == 'POST' && (($_SERVER['HTTP_ORIGIN'].$_SERVER['REQUEST_URI']) == (APPURL.(strstr($uri, '/') ? $uri : '/'.$uri)))) {
-				$response = ('Controllers\\'.$controller)::getInstance()->$action_method(new Request($_REQUEST));
+				$response = ('Controllers\\'.$controller)::getInstance()->$action_method(new Request(json_decode(file_get_contents('php://input'), true)));
 				
 				//output api results
 				print_r(json_encode($response));
