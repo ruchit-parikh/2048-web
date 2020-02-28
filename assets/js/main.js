@@ -38,7 +38,6 @@ function ajaxSubmit() {
   let form = event.target.form;
   let isDataValid = form.checkValidity();
   let actionUrl = form.getAttribute('action');
-  const FD = new FormData();
   
   //data is not valid
   if (!isDataValid) {
@@ -46,18 +45,36 @@ function ajaxSubmit() {
     return;
   }
 
-  let data = form.querySelectorAll('input');
+  //create form data
+  let data = form.querySelectorAll('input'), formData = {};
   for (let i = 0; i < data.length; ++i) {
-    FD[data[i].getAttribute('name')] = data[i].value;
+    formData[data[i].getAttribute('name')] = data[i].value;
   }
 
-  fetch(baseUrl + actionUrl, {
-    method: 'post',
-    body: FD,
-  }).then(function(response) {
-    
-  }).then(function(text) {
+  postData(baseUrl + actionUrl, formData);
+}
 
+//post form data on specific url
+async function postData(url = '', data = {}) {
+  //post data on api url
+  let response = await fetch(url, {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+    method: 'POST',
+    body: JSON.stringify(data),
+  }).then(function(response) {
+    if (!response.ok) {
+      //some kind of error in request
+      throw Error(response);
+    } else {
+
+    }
   }).catch(function(error) {
     //onerror
     let messages = document.querySelector('#messages');
@@ -69,4 +86,6 @@ function ajaxSubmit() {
       messages.style.opacity = 0;
     }, 4000);
   });
+
+  return await response.json();
 }

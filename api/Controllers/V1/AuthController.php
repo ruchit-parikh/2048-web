@@ -3,6 +3,7 @@
 namespace Controllers\V1;
 
 use Controllers\Controller;
+use Http\Request;
 use Models\User;
 
 class AuthController extends Controller
@@ -13,9 +14,9 @@ class AuthController extends Controller
 	 * @param $_POST $request
 	 * @return string $token | 422: Validation errors | false
 	 */
-	public function login()
+	public function login(Request $request)
 	{
-		return $this->__loginAttempt($_POST['email'], $_POST['password']);
+		return $this->__loginAttempt($request->email, $request->password);
 	}
 
 	/**
@@ -24,14 +25,10 @@ class AuthController extends Controller
 	 * @param $_POST $request
 	 * @return string $token | 422: Validation errors | false
 	 */
-	public function register()
+	public function register(Request $request)
 	{
-		$user = User::create(array(
-			'name' => $_POST['name'], 
-			'email' => $_POST['email'],
-			'password' => md5($_POST['password']), 
-		));
-
+		$request->password = md5($request->password);
+		$user = User::create($request->only('name', 'email', 'password'));
 		return $this->__loginAttempt($user->columns['email'], $user->column['password']);
 	}
 

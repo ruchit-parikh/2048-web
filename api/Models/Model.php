@@ -93,7 +93,7 @@ class Model
 					}
 
 					$keys .= "$key".' ,';
-					$values .= '"'.htmlspecialchars($value).'"'.' ,';
+					$values .= '"'.$value.'"'.' ,';
 				}
 
 				$statement .= ' ('.rtrim($keys, ',').') VALUES ('.rtrim($values, ',').'); ';
@@ -121,7 +121,7 @@ class Model
 				if (array_key_exists($key, $this->guarded)) {
 					throw new Exception("Key is in guarded mode! You cannot fill it.");
 				}
-				$statement .= $key.' = '.htmlspecialchars($value).' ,';
+				$statement .= $key.' = '.$value.' ,';
 			}
 			$statement = rtrim($statement, ',');
 			$statement .= ' WHERE id = '.$data['id'].';';

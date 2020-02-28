@@ -3,6 +3,7 @@
 namespace Routes;
 
 use Exception;
+use Http\Request;
 
 class Route
 {
@@ -21,13 +22,12 @@ class Route
 	 */
 	public static function post(string $uri, string $controller, string $action_method)
 	{
-
 		try {
 			if ($_SERVER['REQUEST_METHOD'] == 'POST' && (($_SERVER['HTTP_ORIGIN'].$_SERVER['REQUEST_URI']) == (APPURL.(strstr($uri, '/') ? $uri : '/'.$uri)))) {
-				$response = 'Controllers\\'.$controller::getInstance()->$action_method();
+				$response = ('Controllers\\'.$controller)::getInstance()->$action_method(new Request($_REQUEST));
 				
 				//output api results
-				print_r($response);
+				print_r(json_encode($response));
 			}
 		} catch (Exception $e) {
 			echo "Error resolving route. Error Details: ".$e->getMessage();
