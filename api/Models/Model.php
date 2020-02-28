@@ -3,7 +3,6 @@
 namespace Models;
 
 use Database\Connection as DatabaseConnection;
-use DateTime;
 use Exception;
 
 class Model 
@@ -45,8 +44,6 @@ class Model
 			foreach ($data as $key => $value) {
 				$model->columns[$key] = $value;
 			}
-			$model->columns['created_at'] = new DateTime();
-			$model->columns['updated_at'] = new DateTime();
 			
 			$model->store();
 			
@@ -70,7 +67,7 @@ class Model
 			return $this->update($this->columns);
 		} else {
 			//insert query
-			return Model::insert($this);
+			return get_called_class()::insert($this);
 		}
 	}
 
@@ -126,7 +123,7 @@ class Model
 				}
 				$statement .= $key.' = '.htmlspecialchars($value).' ,';
 			}
-			rtrim($statement, ',');
+			$statement = rtrim($statement, ',');
 			$statement .= ' WHERE id = '.$data['id'].';';
 			$this->connection->query($statement);
 			return true;

@@ -2,5 +2,7 @@
 
 namespace Routes;
 
-Route::post('/register', 'Controllers\V1\AuthController', 'register');
-Route::post('/login', 'Controllers\V1\AuthController', 'login');
+use Routes\Route;
+
+Route::post('/register', 'V1\AuthController', 'register');
+Route::post('/login', 'V1\AuthController', 'login');

@@ -24,7 +24,7 @@ class Route
 
 		try {
 			if ($_SERVER['REQUEST_METHOD'] == 'POST' && (($_SERVER['HTTP_ORIGIN'].$_SERVER['REQUEST_URI']) == (APPURL.(strstr($uri, '/') ? $uri : '/'.$uri)))) {
-				$response = $controller::getInstance()->$action_method();
+				$response = 'Controllers\\'.$controller::getInstance()->$action_method();
 				
 				//output api results
 				print_r($response);

@@ -1,7 +1,7 @@
 <?php
 
 // show error reporting
-ini_set('display_errors', 1);
+ini_set('display_errors', 0);
 error_reporting(E_ALL);
 
 //application name
@@ -11,7 +11,7 @@ define('APPNAME', '2048 WEB');
 define('APPURL', 'http://localhost/2048-web/api/v1');
 
 //Database host name 
-define('DBHOST','http://localhost');
+define('DBHOST','localhost');
 
 //Database name
 define('DBNAME','2048_web');
@@ -21,3 +21,7 @@ define('DBUSER','root');
 
 //Database password
 define('DBPWD','smile');
+
+//run migration on request
+//kindly set this value to false after it's migrated
+define('RUN_MIGRATION', false);

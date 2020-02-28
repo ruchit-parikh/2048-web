@@ -25,8 +25,12 @@ class Connection
 	{
 		if (empty(self::$connection)) {
 			try {
-				self::$connection = new PDO("mysql:host = ".DBHOST."; dbname = ".DBNAME, DBUSER, DBPWD);
+				self::$connection = new PDO(("mysql:host=".DBHOST.";dbname=".DBNAME), DBUSER, DBPWD);
 				self::$connection->exec("set names utf8");
+				//display errors if debug is true
+				if (ini_get('display_errors')) {
+					self::$connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				}
 			} catch(Exception $exception) {
 				echo "Connection error: ".$exception->getMessage();
 			}
