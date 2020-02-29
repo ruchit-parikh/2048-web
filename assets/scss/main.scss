@@ -102,8 +102,7 @@
   }
 
   //forms
-  #login-form, 
-  #register-form {
+  .form-container {
     position: absolute;
     top: 0px;
     left: 0px;
@@ -112,7 +111,7 @@
     margin: 0px;
     min-height: 60vh;
     background-color: map-get($colors, secondary);
-    transition: all 0.25s ease-in-out;
+    transition: all 0.5s ease-in-out;
   }
 
   #login-form {

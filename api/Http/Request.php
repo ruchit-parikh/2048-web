@@ -70,7 +70,7 @@ class Request
                     }
                 }
 
-                if (!$is_valid) {
+                if ($is_valid !== true) {
                     $messages[] = $is_valid;
                 }
             }

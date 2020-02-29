@@ -7,29 +7,29 @@ let InputManager = (function () {
   var InputManagerFactory = function() {
     this.listenKeyboardInputs();
     this.listenForDragInputs();
-  }
+  };
 
   //listener for keyboard inputs
   InputManagerFactory.prototype.listenKeyboardInputs = function() {
     document.onkeyup = function(event) {
       switch(event.keyCode) {
-        case inputs.LEFT:
-        case inputs.A:
+        case INPUTS.LEFT:
+        case INPUTS.A:
           grid.moveTilesLeft();
           break;
         
-        case inputs.UP:
-        case inputs.W:
+        case INPUTS.UP:
+        case INPUTS.W:
           grid.moveTilesUp();
           break;
 
-        case inputs.RIGHT:
-        case inputs.D:
+        case INPUTS.RIGHT:
+        case INPUTS.D:
           grid.moveTilesRight();
           break;
         
-        case inputs.DOWN:
-        case inputs.S:
+        case INPUTS.DOWN:
+        case INPUTS.S:
           grid.moveTilesDown();
           break;
       }
@@ -42,11 +42,11 @@ let InputManager = (function () {
         gameOver();
       }
     } 
-  }
+  };
 
   //listen to mouse or touch inputs
   InputManagerFactory.prototype.listenForDragInputs = function() {
-    let pos = document.querySelector('#game-grid').getBoundingClientRect();
+    let pos = GAME_GRID_NODE.getBoundingClientRect();
     let startX, startY, endX, endY;
     document.ontouchstart = dragStart;
     document.ontouchmove = dragMove;
@@ -84,7 +84,7 @@ let InputManager = (function () {
       let horizontal = endX - startX;
       let vertical = endY - startY;
 
-      if (Math.abs(horizontal) > drag || Math.abs(vertical) > drag) {
+      if (Math.abs(horizontal) > DRAG || Math.abs(vertical) > DRAG) {
         if (Math.abs(horizontal) > Math.abs(vertical)) {
           //x-swipe
           if (endX > startX) {
@@ -114,7 +114,7 @@ let InputManager = (function () {
         }
       }
     }
-  }
+  };
 
   //creates instance only once
   function createInstance() {
@@ -135,7 +135,7 @@ let InputManager = (function () {
 
 //game over
 function gameOver() {
-  let gameOver = document.querySelector('#game-over');
-  gameOver.style.opacity = 1;
+  GAME_OVER_NODE.style.opacity = 1;
   ScoreManager.getInstance().updateBestIfPossilble();
+  DataManager.getInstance().refreshLeaderBoard();
 }

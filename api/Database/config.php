@@ -1,14 +1,14 @@
 <?php
 
 // show error reporting
-ini_set('display_errors', 1);
+ini_set('display_errors', 0);
 error_reporting(E_ALL);
 
 //application name
 define('APPNAME', '2048 WEB');
 
 //application homepage url
-define('APPURL', 'http://localhost/2048-web/api/v1');
+define('APPURL', 'http://192.168.1.100/2048-web/api/v1');
 
 //Database host name 
 define('DBHOST','localhost');

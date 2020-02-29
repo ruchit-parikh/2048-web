@@ -12,5 +12,17 @@ form {
         width: 100%;
       }
     }
+
+    &.error-block {
+      input {
+        border: 1px solid map-get($colors, red);
+      }
+
+      .error-message {
+        font-size: 0.7em;
+        font-weight: 400;
+        color: map-get($colors, red);
+      }
+    }
   }
 }

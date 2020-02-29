@@ -2,6 +2,9 @@
 
 namespace Http;
 
+use Database\Connection;
+use Exception;
+
 trait Validator 
 {
     /**
@@ -16,7 +19,7 @@ trait Validator
         if (!empty($value)) {
             return true;
         }
-        return ucfirst($field_name).'is required.';
+        return ucfirst($field_name).' is required.';
     }
 
     /**
@@ -31,7 +34,7 @@ trait Validator
         if (filter_var($value, FILTER_VALIDATE_EMAIL)) {
             return true;
         }
-        return ucfirst($field_name).'must be a valid email address.';
+        return ucfirst($field_name).' must be a valid email address.';
     }
 
     /**
@@ -47,7 +50,7 @@ trait Validator
         if (strlen($value) >= $min_length) {
             return true;
         }
-        return ucfirst($field_name).'must have at least length of '.$min_length.'.';
+        return ucfirst($field_name).' must have at least length of '.$min_length.'.';
     }
 
     /**
@@ -63,7 +66,23 @@ trait Validator
         if (strlen($value) <= $max_length) {
             return true;
         }
-        return ucfirst($field_name).'must have max length of '.$max_length.'.';
+        return ucfirst($field_name).' must have max length of '.$max_length.'.';
+    }
+
+    /**
+     * Check if field has same value as confirm-field
+     * 
+     * @param string $field_name
+     * @param string $value
+     * @param string $confirmed_value
+     * @return true | string $message
+     */
+    public function confirmed($field_name, $value, $confirmed_value)
+    {
+        if ($value == $confirmed_value) {
+            return true;
+        }
+        return ucfirst($field_name).' must be matched.';
     }
 
     /**
@@ -71,11 +90,27 @@ trait Validator
      * 
      * @param string $field_name
      * @param string $value
-     * @param array $params
+     * @param array $params - ['table_name', 'column_name', 'exclude_ids']
      * @return true | string $message
      */
     public function unique($field_name, $value, $params)
     {
-        
+        try {
+            $query = 'SELECT * FROM '.$params[0].' WHERE '.$params[1].' = "'.$value.'"';
+            
+            //for update these value will be set to exclude current users email
+            if (!empty($params[2])) {
+                $query .= ' AND ID != "'.$params[2].'"';
+            }
+            $query .= ';';
+
+            $result = Connection::getInstance()->query($query);
+            if ($result->rowCount() == 0) {
+                return true;
+            }
+        } catch (Exception $e) {
+            echo "Error Details: ".$e->getMessage();
+        }
+        return ucfirst($field_name).' already exists in our data.';
     }
 }

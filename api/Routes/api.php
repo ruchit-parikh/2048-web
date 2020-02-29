@@ -5,7 +5,7 @@ namespace Routes;
 use Routes\Route;
 
 if (isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN'] != '') {
-    $allowed_urls = ['http://127.0.0.1', 'http://localhost'];
+    $allowed_urls = ['http://127.0.0.1', 'http://localhost', 'http://192.168.1.100'];
 
     foreach ($allowed_urls as $url) {
         if ($url == $_SERVER['HTTP_ORIGIN']) {

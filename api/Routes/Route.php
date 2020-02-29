@@ -23,7 +23,7 @@ class Route
 	public static function post(string $uri, string $controller, string $action_method)
 	{
 		try {
-			if ($_SERVER['REQUEST_METHOD'] == 'POST' && (($_SERVER['HTTP_ORIGIN'].$_SERVER['REQUEST_URI']) == (APPURL.(strstr($uri, '/') ? $uri : '/'.$uri)))) {
+			if ($_SERVER['REQUEST_METHOD'] == 'POST' && (((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https://" : "http://").$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']) == (APPURL.(strstr($uri, '/') ? $uri : '/'.$uri)))) {
 				$response = ('Controllers\\'.$controller)::getInstance()->$action_method(new Request(json_decode(file_get_contents('php://input'), true)));
 				
 				//output api results

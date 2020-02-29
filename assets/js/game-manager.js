@@ -8,29 +8,29 @@ let GameManager = (function() {
     this.scoreManager = ScoreManager.getInstance();
     this.dataManager = DataManager.getInstance();
     this.loadData();
-  }
+  };
 
   //restarts whole game
   GameManagerFactory.prototype.restart = function() {
     this.grid.reset();
     this.scoreManager.reset();
-    document.querySelector('#game-over').style.opacity = 0;
-  }
+    GAME_OVER_NODE.style.opacity = 0;
+  };
 
   //loads all game data from cookie if not logged in else from server
   GameManagerFactory.prototype.loadData = function() {
-    let best = this.dataManager.get(bestScoreCookie, 0);
-    let name = this.dataManager.get(playerNameCookie, 'Guest');
+    let best = this.dataManager.get(BEST_SCORE_COOKIE, 0);
+    let name = this.dataManager.get(PLAYER_NAME_COOKIE, 'Guest');
     
     //set score and name display values
     this.scoreManager.setCurrentBest(best);
-    document.querySelector("#player-name").innerHTML = name;
+    PLAYER_NAME_NODE.innerHTML = name;
 
     if (!AuthManager.getInstance().isLoggedIn()) {
       //hide leaderboard
-      document.querySelector('#leaderboard #login-form').style.display = 'block';
+      LOGIN_FORM_NODE.style.display = 'block';
     }
-  }
+  };
 
   //create only one instance
   function createInstance() {

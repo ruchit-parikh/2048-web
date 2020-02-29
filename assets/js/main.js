@@ -22,22 +22,19 @@ function restart() {
 
 //loads register form
 function loadRegisterForm(willDisplay) {
-  let registerForm = document.querySelector('#register-form');
   if (willDisplay) {
-    registerForm.style.left = '0%';
+    REGISTER_FORM_NODE.style.left = '0%';
   } else {
-    registerForm.style.left = '100%';
+    REGISTER_FORM_NODE.style.left = '100%';
   }
 }
 
-//ajax submit
+//ajax submit for login and register form
 function ajaxSubmit() {
   event.preventDefault();
   event.stopPropagation();
 
-  let form = event.target.form;
-  let isDataValid = form.checkValidity();
-  let actionUrl = form.getAttribute('action');
+  let targetBtn = event.target, form = event.target.form, isDataValid = form.checkValidity(), actionUrl = form.getAttribute('action');
   
   //data is not valid
   if (!isDataValid) {
@@ -51,45 +48,49 @@ function ajaxSubmit() {
     formData[data[i].getAttribute('name')] = data[i].value;
   }
 
-  postData(baseUrl + actionUrl, formData, function(response) {
+  //disable all the button while processing over api
+  let buttons = form.querySelectorAll('button, a');
+  for (let i in buttons) {
+    buttons[i].disabled = true;
+  }
+  
+  //set button loaders
+  let targetBtnName = targetBtn.innerHTML;
+  targetBtn.innerHTML = 'Processing...';
+
+  postData(BASE_URL + actionUrl, formData, function(response) {
     //on success
-
-  }, function(error) {
-    //onerror
-    let messages = document.querySelector('#messages');
-    messages.style.bottom = '10px';
-    messages.style.opacity = 1;
-    //again hide the message
-    setTimeout(function() {
-      messages.style.bottom = '-100px';
-      messages.style.opacity = 0;
-    }, 4000);
-  });
-}
-
-//post form data on specific url
-async function postData(url = '', data = {}, onsuccess, onerror) {
-  //post data on api url
-  let response = await fetch(url, {
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    mode: 'cors',
-    cache: 'no-cache',
-    redirect: 'follow',
-    referrerPolicy: 'no-referrer',
-    method: 'POST',
-    body: JSON.stringify(data),
-  }).then(function(response) {
-    if (!response.ok) {
-      //some kind of error in request
-      throw Error(response);
-    } else {
-      onsuccess(response);
+    setCookie(AUTH_TOKEN, response.token, 1);
+    DataManager.getInstance().refreshLeaderBoard();
+    return true;
+  }, function(response) {
+    //server errors
+    showError(response);
+    return false;  
+  }, function(errors) {
+    //validation errors
+    //remove old messages
+    let oldMessages = form.querySelectorAll('span.error-message'), i = 0;
+    while (i < oldMessages.length) {
+      oldMessages[i].parentNode.classList.remove('error-block');
+      oldMessages[i].parentNode.removeChild(oldMessages[i]);
+      i++;
     }
-  }).catch(function(error) {
-    onerror(error);
-  });
 
-  return await response.json();
+    for (let fieldName in errors) {
+      //display errors on form
+      let inputContainer = form.querySelector("input[name=" + fieldName + "]").closest('.form-group');
+      let message = document.createElement('span');
+      message.classList.add('error-message');
+      message.innerHTML = errors[fieldName][0];
+      inputContainer.classList.add('error-block');
+      inputContainer.appendChild(message);
+    }
+  }, function() {
+    //reenable the buttons
+    targetBtn.innerHTML = targetBtnName;
+    for (let i in buttons) {
+      buttons[i].disabled = false;
+    }  
+  });
 }
