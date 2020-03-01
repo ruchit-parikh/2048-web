@@ -7,18 +7,25 @@ let DataManager = (function() {
   };
 
   //get values of current user from key
-  DataManagerFactory.prototype.get = function(key, defaultValue) {
+  DataManagerFactory.prototype.get = function(key, defaultValue, displayNodes) {
     if (!this.authManager.isLoggedIn()) {
       //load data from cache
       return getCookie(key) || defaultValue;
     } else {
       //load data from server
       return postData(BASE_URL + '/user/data', {token: this.authManager.token, key: key}, function(response) {
-        if (typeof response.result != 'undefined') {
-          setCookie(key, response.result, 30);
-          return response.result;
+        if (response != null) {
+          setCookie(key, response, 30);
+        } else {
+          response = getCookie(key) || defaultValue;
         }
-        return getCookie(key) || defaultValue;
+        //set html after getting data from server
+        if (typeof displayNodes != 'undefined') {
+          for (let i = 0; i < displayNodes.length; ++i) {
+            displayNodes[i].innerHTML = response;
+          }
+        }
+        return response;
       }, function(response) {
         showError(response);
         return getCookie(key) || defaultValue;
@@ -58,7 +65,7 @@ let DataManager = (function() {
         for (let i in response) {
           let listItem = document.createElement('li');
           listItem.classList.add('list-item');
-          listItem.innerHTML = '<span class="name">' + response[i].name + '</span><span class="points">' + response[i].points + '</span>';
+          listItem.innerHTML = '<span class="name">' + response[i].name + '</span><span class="points">' + response[i].best_score + '</span>';
           leaderboard.appendChild(listItem);
         }
         
@@ -73,8 +80,8 @@ let DataManager = (function() {
         REGISTER_FORM_NODE.style.left = "0%";
         return false;
       }, false, function() {
-        PLAYER_NAME_NODE.innerHTML = this.get('name', 'Guest');
-        ScoreManager.getInstance().setCurrentBest(this.get('best', 0));
+        PLAYER_NAME_NODE.innerHTML = DataManager.getInstance().get(PLAYER_NAME_COOKIE, 'Guest', PLAYER_NAME_NODE);
+        ScoreManager.getInstance().setCurrentBest(DataManager.getInstance().get(BEST_SCORE_COOKIE, 0, BEST_SCORES_NODE));
         ScoreManager.getInstance().updateBestIfPossilble();
       });
     }

@@ -118,17 +118,53 @@ class Model
 			$statement = 'UPDATE '.$this->table.' SET ';
 
 			foreach ($data as $key => $value) {
-				if (array_key_exists($key, $this->guarded)) {
-					throw new Exception("Key is in guarded mode! You cannot fill it.");
-				}
 				$statement .= $key.' = '.$value.' ,';
 			}
 			$statement = rtrim($statement, ',');
-			$statement .= ' WHERE id = '.$data['id'].';';
+			$statement .= ' WHERE id = '.$this->columns['id'].';';
 			$this->connection->query($statement);
 			return true;
 		} catch (Exception $e) {
 			echo "Failed to update data in database. Error Details: ".$e->getMessage();
+			return false;
+		}
+	}
+
+	/**
+	 * Get list of all data from table with only specific columns present
+	 * 
+	 * @param array $columns
+	 * @return array
+	 */
+	public static function only($columns)
+	{
+		try {
+			$model_name = get_called_class();
+			$model = new $model_name();
+			$statement = 'SELECT '.implode(',', $columns).' FROM '.$model->table.';';
+			return $model->connection->query($statement);
+		} catch (Exception $e) {
+			echo "Failed to get data from database. Error Details: ".$e->getMessage();
+			return false;
+		}
+	}
+
+	/**
+	 * Get Model instance where column value matches
+	 * 
+	 * @param string $column_name
+	 * @param string $column_value
+	 * @return array
+	 */
+	public static function where(string $column_name, string $column_value)
+	{
+		try {
+			$model_name = get_called_class();
+			$model = new $model_name();
+			$statement = 'SELECT * FROM '.$model->table.' WHERE '.$column_name.' = "'.$column_value.'";';
+			return $model->connection->query($statement);
+		} catch (Exception $e) {
+			echo "Failed to get data from database. Error Details: ".$e->getMessage();
 			return false;
 		}
 	}

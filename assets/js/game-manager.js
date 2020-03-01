@@ -19,8 +19,8 @@ let GameManager = (function() {
 
   //loads all game data from cookie if not logged in else from server
   GameManagerFactory.prototype.loadData = function() {
-    let best = this.dataManager.get(BEST_SCORE_COOKIE, 0);
-    let name = this.dataManager.get(PLAYER_NAME_COOKIE, 'Guest');
+    let best = this.dataManager.get(BEST_SCORE_COOKIE, 0, BEST_SCORES_NODE);
+    let name = this.dataManager.get(PLAYER_NAME_COOKIE, 'Guest', [PLAYER_NAME_NODE]);
     
     //set score and name display values
     this.scoreManager.setCurrentBest(best);
@@ -29,6 +29,8 @@ let GameManager = (function() {
     if (!AuthManager.getInstance().isLoggedIn()) {
       //hide leaderboard
       LOGIN_FORM_NODE.style.display = 'block';
+    } else {
+      DataManager.getInstance().refreshLeaderBoard();
     }
   };
 

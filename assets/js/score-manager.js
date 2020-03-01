@@ -71,4 +71,4 @@ let ScoreManager = (function() {
       return instance;
     }
   };
-})(); 
+})();

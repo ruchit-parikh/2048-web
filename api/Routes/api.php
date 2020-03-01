@@ -20,3 +20,11 @@ if (isset($_SERVER['HTTP_ORIGIN']) && $_SERVER['HTTP_ORIGIN'] != '') {
 
 Route::post('/register', 'V1\AuthController', 'register');
 Route::post('/login', 'V1\AuthController', 'login');
+
+//token verification
+Route::post('/auth/verify', 'V1\AuthController', 'verify');
+
+//users routes
+Route::post('/user/data', 'V1\UserController', 'getData');
+Route::post('/user/data/update', 'V1\UserController', 'store');
+Route::post('/scores', 'V1\UserController', 'scores');

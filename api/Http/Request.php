@@ -17,7 +17,7 @@ class Request
     public function __construct($data)
     {
         foreach ($data as $key => $value) {
-            $this->$key = htmlspecialchars(stripslashes($value), ENT_QUOTES, 'UTF-8');
+            $this->$key = htmlspecialchars(stripslashes(strip_tags($value)), ENT_QUOTES, 'UTF-8');
         }
     }
 
@@ -88,5 +88,4 @@ class Request
             die();
         }
     }
-
 }

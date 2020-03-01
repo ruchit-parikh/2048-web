@@ -4,11 +4,17 @@
 ini_set('display_errors', 0);
 error_reporting(E_ALL);
 
+//application key which is used for encryption and decryption
+define('APPKEY', '{{ ENTER_YOUR_APP_SECRET_KEY_HERE }}');
+
 //application name
 define('APPNAME', '2048 WEB');
 
 //application homepage url
-define('APPURL', 'http://192.168.1.100/2048-web/api/v1');
+define('APIURL', 'http://192.168.1.100/2048-web/api/v1');
+
+//api throttle limit in seconds/request
+define('THROTTLE', 0.25);
 
 //Database host name 
 define('DBHOST','localhost');

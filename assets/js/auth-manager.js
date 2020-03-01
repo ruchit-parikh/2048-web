@@ -20,7 +20,7 @@ let AuthManager = (function() {
 
   //verify token if it's expired or not and if it's not expired it will also refresh token
   AuthManagerFactory.prototype.verify = function(token) {
-    return postData(Base_URL + '/auth/verify', {token: token}, function(response) {
+    return postData(BASE_URL + '/auth/verify', {token: token}, function(response) {
       return true;
     }, function(response) {
       showError(response);

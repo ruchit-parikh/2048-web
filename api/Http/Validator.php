@@ -113,4 +113,28 @@ trait Validator
         }
         return ucfirst($field_name).' already exists in our data.';
     }
+
+    /**
+     * Checks if field has similar entry in database
+     * 
+     * @param string $field_name
+     * @param string $value
+     * @param array $params - ['table_name', 'column_name', 'match_column_name', 'match_column_value']
+     * @return true | string $message
+     */
+    public function match($field_name, $value, $params)
+    {
+        try {
+            $query = 'SELECT * FROM '.$params[0].' WHERE '.$params[1].' = "'.$value.'"';
+            $query .= ' AND '.$params[2].' = "'.md5($params[3]).'";';
+
+            $result = Connection::getInstance()->query($query);
+            if ($result->rowCount() > 0) {
+                return true;
+            }
+        } catch (Exception $e) {
+            echo "Error Details: ".$e->getMessage();
+        }
+        return ucfirst($field_name).' and it\'s combination does not exist in our data.';
+    }
 }

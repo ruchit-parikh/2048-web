@@ -41,10 +41,10 @@ const INPUTS = {
   S: 83,
   A: 65,
   D: 68
-}
+};
 
 //cookie names
-BEST_SCORE_COOKIE = 'best';
+BEST_SCORE_COOKIE = 'best_score';
 PLAYER_NAME_COOKIE = 'name';
 AUTH_TOKEN = 'bearer';
 
