@@ -25,6 +25,12 @@ let DataManager = (function() {
             displayNodes[i].innerHTML = response;
           }
         }
+
+        //patch work for best score 
+        if (key == BEST_SCORE_COOKIE) {
+          ScoreManager.getInstance().setCurrentBest(response);
+          ScoreManager.getInstance().updateBestIfPossilble();
+        }
         return response;
       }, function(response) {
         showError(response);
@@ -35,16 +41,12 @@ let DataManager = (function() {
 
   //stores data in cache or server if user is loggedin
   DataManagerFactory.prototype.store = function(key, value) {
-    if (!this.authManager.isLoggedIn()) {
-      //store data in cache
-      setCookie(key, value, 30);
-    } else {
+    setCookie(key, value, 30);
+    if (this.authManager.isLoggedIn()) {
       //store data on server
       postData(BASE_URL + '/user/data/update', {token: this.authManager.token, key: key, value: value}, function(response) {
-        setCookie(key, value, 30);
         return true;
       }, function(response) {
-        setCookie(key, value, 30);
         showError(response);
         return false;
       });
@@ -79,10 +81,6 @@ let DataManager = (function() {
         LOGIN_FORM_NODE.style.left = "0%";
         REGISTER_FORM_NODE.style.left = "0%";
         return false;
-      }, false, function() {
-        PLAYER_NAME_NODE.innerHTML = DataManager.getInstance().get(PLAYER_NAME_COOKIE, 'Guest', PLAYER_NAME_NODE);
-        ScoreManager.getInstance().setCurrentBest(DataManager.getInstance().get(BEST_SCORE_COOKIE, 0, BEST_SCORES_NODE));
-        ScoreManager.getInstance().updateBestIfPossilble();
       });
     }
   };

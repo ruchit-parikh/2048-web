@@ -22,7 +22,7 @@ class Model
 	protected $guarded;
 
 	// constructor with $db as database connection
-	protected function __construct()
+	public function __construct()
 	{
 		$this->connection = DatabaseConnection::getInstance();
 		$this->table = $this->__plural(get_class($this));
