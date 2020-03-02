@@ -81,6 +81,9 @@ let DataManager = (function() {
         LOGIN_FORM_NODE.style.left = "0%";
         REGISTER_FORM_NODE.style.left = "0%";
         return false;
+      }, false, function() {
+        DataManager.getInstance().get(PLAYER_NAME_COOKIE, 'Guest', [PLAYER_NAME_NODE]);
+        DataManager.getInstance().get(BEST_SCORE_COOKIE, 0, BEST_SCORES_NODE);
       });
     }
   };

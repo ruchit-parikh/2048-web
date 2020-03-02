@@ -68,7 +68,7 @@ class UserController extends Controller
             }
             $users = User::only(['name', 'best_score'])->fetchAll(PDO::FETCH_ASSOC);
             usort($users, function($current, $next) {
-                return $current['best_score'] > $next['best_score'] ? 1 : -1;
+                return $current['best_score'] > $next['best_score'] ? -1 : 1;
             });
             return $users;
         } catch (Exception $e) {

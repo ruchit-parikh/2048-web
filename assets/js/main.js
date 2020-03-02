@@ -61,6 +61,7 @@ function ajaxSubmit() {
   postData(BASE_URL + actionUrl, formData, function(response) {
     //on success
     setCookie(AUTH_TOKEN, response.token, 1);
+    AuthManager.getInstance().token = response.token;
     DataManager.getInstance().refreshLeaderBoard();
     return true;
   }, function(response) {
