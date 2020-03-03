@@ -47,8 +47,9 @@
 
 #leaderboard {
   position: relative;
-  overflow: hidden;
-
+  overflow-x: hidden;
+  overflow-y: scroll;
+  
   @include media-breakpoint-down (md) {
     min-height: 50vh;
   }

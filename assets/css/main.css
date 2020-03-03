@@ -2840,7 +2840,8 @@ html, body {
 
 #leaderboard {
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 @media (max-width: 767px) {
